@@ -1,0 +1,22 @@
+# Using the Roman High Latitude Time Domain Reference survey (Rose+2021), 
+# Track down issues with SCONE and Pippin
+  
+SIM:
+  SN_Ia:
+    IA_SALT3:
+      BASE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/simgen_SNIa.input
+    GLOBAL:
+      FORMAT_MASK: 48
+      NGEN_UNIT: 0.05
+      RANSEED_REPEAT: 1 12345
+      BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 1
+
+CLASSIFICATION:
+  SCONE:
+    CLASSIFIER: SconeClassifier
+    MODE: predict
+    MASK: SN_Ia
+    OPTS:
+      MODEL: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/3_clas/models/scone
+      NUM_EPOCHS: 5
+      KCOR_FILE: /project2/rkessler/SURVEYS/WFIRST/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits

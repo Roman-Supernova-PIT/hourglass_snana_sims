@@ -1,0 +1,53 @@
+# From $PLASTICC_ROOT/model_config/SIMGEN_INCLUDE_SNIa-91bg.INPUT
+DOCUMENTATION:
+DOCUMENTATION_END:
+
+INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/sim_roman.input
+
+GENTYPE: 11
+GENMODEL: $PLASTICC_ROOT/model_libs_updates/SIMSED.SNIa-91bg
+
+SIMSED_USE_BINARY:   1
+SIMSED_PATH_BINARY:  $PLASTICC_MODELS/SIMSED_BINARIES
+
+# Volumetric rate
+DNDZ:  POWERLAW 3.0E-6 1.5   # 3E-6/yr/Mpc^3 x (1+z)^1.5
+
+# Extinction
+# GN updated 20210321 per RK - these are Maria Vincenzi's Galaxy Extinction params
+GENPEAK_RV:       3.1          # peak prob dust parameter
+GENRANGE_RV:      3.0  3.2     # min and max limits for RV generation
+GENSIGMA_RV:      0.0  0.0     # lo & hi Gaussian sigmas
+GENRANGE_AV:      0.001  3.0   # CCM89 V-band extinction
+GENTAU_AV:        1.7          # dN/dAV = exp(-AV/xxx)
+GENSIG_AV:        0.6          # += Guass(AV,sigma)
+GENRATIO_AV0:     4.0
+
+# ==============================
+# var(stretch)   =  0.096^2
+# var(color)     =  0.175^2
+# reduced covar  = -0.656
+
+SIMSED_PARAM:  stretch
+GENPEAK_stretch:   0.975
+GENSIGMA_stretch:  0.096 0.096
+GENRANGE_stretch:  0.65  1.25
+
+SIMSED_PARAM:  color
+GENPEAK_color:   0.557
+GENSIGMA_color:  0.175 0.175
+GENRANGE_color:  0.0 1.0
+
+SIMSED_REDCOR(stretch,color):  -0.656
+
+
+# ----- Not in PLASTICC
+
+CIDOFF: 20000
+
+CUTWIN_TRESTMIN: -19 -5         #at least 1 epoch before -5 d (rest-frame)
+CUTWIN_TRESTMAX: +30 +80        #at least 1 epoch past +30 d
+CUTWIN_TGAPMAX:   0   20        #largest Trest gap (days)
+CUTWIN_T0GAPMAX:  0   10        #largest Trest gap near peak (days)
+
+# -------

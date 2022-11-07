@@ -1,0 +1,39 @@
+INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/sim_roman.input
+
+GENTYPE: 10
+GENMODEL:    SALT3.K21
+GENSOURCE:   RANDOM
+GENMODEL: /project2/rkessler/SURVEYS/WFIRST/ROOT/SALT3-NIR_dev/SALT3.P22-NIR
+#GENMODEL: SALT3.K21
+
+DNDZ: POWERLAW2 2.5E-5  1.5 0.0 1.0    # from Didlay 2008
+DNDZ: POWERLAW2 9.7E-5 -0.5 1.0 5.0    # high-z extension from Lou
+
+#LENSING_PROBMAP_FILE: $SNDATA_ROOT/models/lensing/LENSING_PROBMAP_LogNormal+MICECATv1.DAT
+#LENSING_DMUSCALE: 1.375
+
+GENMAG_SMEAR_MODELNAME:  G10
+# --------------------------
+# define SALT2 params from SK2016, using G10 High-z row
+
+GENPEAK_SALT2c:    -0.054
+#ZVARIATION_POLY: GENPEAK_SALT2c 0.0,0.01  # ==> valid
+
+GENSIGMA_SALT2c:    0.043  0.101     # bifurcated sigmas
+GENRANGE_SALT2c:   -0.300  0.500     # color range
+
+GENPEAK_SALT2x1:     0.973  # from SK16
+GENSIGMA_SALT2x1:    1.472   0.222     # bifurcated sigmas
+GENRANGE_SALT2x1:   -3.0     2.0       # x1 (stretch) range
+
+GENALPHA_SALT2:  0.14
+GENBETA_SALT2:   3.1
+
+# ----------------------
+
+CIDOFF: 10000
+
+CUTWIN_TRESTMIN: -19 -5         #at least 1 epoch before -5 d (rest-frame)
+CUTWIN_TRESTMAX: +30 +80        #at least 1 epoch past +30 
+CUTWIN_TGAPMAX:  0   20         #largest Trest gap (days)
+CUTWIN_T0GAPMAX: 0   10         #largest Trest gap near peak (days)

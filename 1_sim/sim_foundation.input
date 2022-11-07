@@ -1,0 +1,64 @@
+   
+########################################################
+#
+# Input file for $SNANA_DIR/bin/snlc_sim.exe
+# Beware that we include SALT2 distributions for high-z
+# and do not use low-z x1 distribution that has two peaks
+#
+#########################################################
+PATH_SNDATA_SIM:  $SCRATCH_SIMDIR
+INPUT_INCLUDE_FILE: /project2/rkessler/SURVEYS/WFIRST/ROOT/analysis_inputs/sim/SIMGEN_SALT2_MODEL.input
+
+GENTYPE: 1
+GENMODEL: $WFIRST_ROOT/SALT3-NIR_dev/SALT3-NIR
+
+NGENTOT_LC:    800             # number of SN lightcurves to generate 
+GENVERSION: DS_Foundation_2020_BMR         # SNDATA version to generate
+GENSOURCE:  RANDOM   
+
+SIMLIB_FILE: $PIPPIN_BASE/data_files/surveys/foundation/sims/foundation.SIMLIB
+
+CIDOFF: 500
+KCOR_FILE:  $SNDATA_ROOT/kcor/PS1/PS1s_RS14/kcor_PS1_none.fits
+APPLY_SEARCHEFF_OPT: 3
+EXPOSURE_TIME_FILTER: g 0.042
+EXPOSURE_TIME_FILTER: r 0.06
+EXPOSURE_TIME_FILTER: i 0.07
+
+
+# selection criteria for generation
+GENFILTERS:       gri
+
+GENSIGMA_SEARCH_PEAKMJD:  1.0         # sigma-smearing for  SEARCH_PEAKMJD (days)
+
+GENRANGE_PEAKMJD:  57000.0  57220.0
+SOLID_ANGLE: 6.28 # 1 field, 7 sq degreees *7
+
+GENRANGE_REDSHIFT:  0.01    0.08
+
+GENSIGMA_VPEC: 300 # physical peculiar vel distribution
+VPEC_ERR: 150 # correction has this error 
+GENRANGE_TREST:   -20.0    80.0     # rest epoch relative to peak (days)
+
+RANSEED: 128473       # random number seed
+
+# smear flags: 0=off, 1=on
+SMEARFLAG_FLUX:    1  # photo-stat smearing of signal, sky, etc ...
+SMEARFLAG_ZEROPT:  0  # smear zero-point with zptsig
+#SMEARFLAG_HOSTGAL: 0  # include host-gal noise
+#HOSTLIB_MSKOPT: 0
+
+SEARCHEFF_SPEC_FILE: $PS1MD_ROOT/models/searcheff/SEARCHEFF_SPEC_LOWZ_r.DAT 
+APPLY_CUTWIN_OPT:     1
+CUTWIN_NEPOCH:   5 -5.              # require 5 epochs (no S/N requirement)
+CUTWIN_TRESTMIN: -20  10
+CUTWIN_TRESTMAX:   9  40
+CUTWIN_MWEBV:      0 .20
+
+#CUTWIN_SNRMAX:   7 gri 2 -20. 80.  # require 1 of griz with S/N > 5
+#CUTWIN_SNRMAX:   9.0 gri 1 -20. 80.  # require 1 of griz with S/N > 5
+
+FORMAT_MASK:  48 # terse format
+
+
+SIMGEN_DUMP:  6  Z  PEAKMJD S2c S2x1 SNRMAX MAGT0_g
