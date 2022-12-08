@@ -1,0 +1,58 @@
+CONFIG:
+  OUTDIR: SIMFIT_OUT
+  BATCH_INFO: sbatch  $SBATCH_TEMPLATES/SBATCH_Midway2.TEMPLATE 60
+  VERSION:
+  - DS_Foundation_2020_PM
+  APPEND_TABLE_VARLIST: RA DEC TGAPMAX NFILT_USEFIT SNRMAX_g SNRMAX_r SNRMAX_i
+
+#END_YAML
+
+  &SNLCINP
+     VERSION_PHOTOMETRY = 'DS_Foundation_2020_PM'
+     ROOTFILE_OUT = 'DS_Foundation_2020_PM.root'
+     KCOR_FILE = '$SNDATA_ROOT/kcor/PS1/PS1s_RS14/kcor_PS1_none.fits'
+  
+     NFIT_ITERATION = 2
+     INTERP_OPT     = 1
+
+!     cutwin_cid          =  0, 99990
+     cutwin_trest        = -20, 60.0
+     cutwin_Nepoch       = 5
+        
+     cutwin_Trestmin  = -99.0, 5.0
+     cutwin_Trestmax  =   0.0, 9999.
+     CUTWIN_SNRMAX       = 3.0, 1.0E9
+     CUTWIN_NFILT_SNRMAX = 2, 99
+     CUTWIN_REDSHIFT = 0.0, 5.0
+
+    
+     ABORT_ON_TRESTCUT=F
+     ABORT_ON_NOEPOCHS = F
+
+
+     SNTABLE_LIST = 'FITRES NOZPHOT'
+
+  &END
+  
+  &FITINP
+  ! Filters are dropped if the central wavelength of a filter is outside of RESTLAMBDA_FITRANGE
+    RESTLAMBDA_FITRANGE = 3200. , 19000.
+    FITMODEL_NAME  = '/project2/rkessler/SURVEYS/WFIRST/ROOT/SALT3-NIR_dev/SALT3.P22-NIR' 
+
+    OPT_MNSTAT_COV = 0
+    OPT_COVAR = 1
+    OPT_XTMW_ERR = 1
+    FUDGEALL_ITER1_MAXFRAC = 0.03
+
+    PRIOR_MJDSIG        = 5.0
+    
+    PRIOR_LUMIPAR_SIGMA = 0.1
+
+    FITWIN_TREST  = -15.0, 45.0
+    FITWIN_PROB   =  0.01, 1.01
+
+! simlib has z, but not something else.
+    FILTLIST_FIT = 'gri'
+ 
+  &END
+  

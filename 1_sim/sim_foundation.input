@@ -10,7 +10,7 @@ PATH_SNDATA_SIM:  $SCRATCH_SIMDIR
 INPUT_INCLUDE_FILE: /project2/rkessler/SURVEYS/WFIRST/ROOT/analysis_inputs/sim/SIMGEN_SALT2_MODEL.input
 
 GENTYPE: 1
-GENMODEL: $WFIRST_ROOT/SALT3-NIR_dev/SALT3-NIR
+GENMODEL: $WFIRST_ROOT/SALT3-NIR_dev/SALT3.P22-NIR
 
 NGENTOT_LC:    800             # number of SN lightcurves to generate 
 GENVERSION: DS_Foundation_2020_BMR         # SNDATA version to generate

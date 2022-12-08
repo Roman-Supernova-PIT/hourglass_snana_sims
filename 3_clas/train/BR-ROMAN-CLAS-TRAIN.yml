@@ -1,0 +1,47 @@
+# Using the Roman High Latitude Time Domain Reference survey (Rose+2021), 
+# Train SupernNNova and SCONE for Roman.
+
+SIM:
+  #SuperNNOva needs ~400,000 Ia and ~400,000 CC and will balance them 50-50 internally.
+  TRAIN:
+    IA_SALT3:  # ~20k in one Roman survey
+      BASE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/simgen_SNIa.input
+      GENRANGE_REDSHIFT:  0.3  3.50
+    Iax_TEMPLATES:  # ~32k (in Iax and CC) in one Roman survey
+      BASE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/simgen_SNIax.input
+      GENRANGE_REDSHIFT:  0.3  3.50
+    CC_TEMPLATES: # II, IIn, IIb, Ib, Ic, Ic-BL
+      BASE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/simgen_CCSN.input
+      GENRANGE_REDSHIFT:  0.3  3.50
+    SN91bg_TEMPLATES:
+      BASE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/simgen_SNIa_91bg.input
+      GENRANGE_REDSHIFT:  0.3  3.50
+    GLOBAL:
+      FORMAT_MASK: 48
+      NGEN_UNIT: 1
+      RANSEED_REPEAT: 20 12345
+      BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 20
+      
+CLASSIFICATION:
+  SNN_TRAIN:
+    CLASSIFIER: SuperNNovaClassifier
+    MODE: train
+    GPU: True # always when training
+    CLEAN: True # Or false - determine if Pippin removes the processed folder to save space
+    MASK_SIM: TRAIN
+    OPTS:
+      VARIANT: vanilla # or "variational" or "bayesian". Defaults to "vanilla"
+      REDSHIFT: True  # Use redshift info when classifying. Defaults to True.
+      NORM: cosmo_quantile  # How to normalise LCs. Other options are "perfilter", "cosmo", "global" or "cosmo_quantile".  
+      CYCLIC: True  # Defaults to True for vanilla and variational model
+      SEED: 0  # Sets random seed. Defaults to 0.
+      
+  SCONE_TRAIN:
+    CLASSIFIER: SconeClassifier
+    MODE: train
+    MASK_SIM: TRAIN
+    OPTS:
+      GPU: False
+      NUM_EPOCHS: 100
+      SIM_FRACTION: 10  # only need 1/10 the sim size as SNN.
+      KCOR_FILE: /project2/rkessler/SURVEYS/WFIRST/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits

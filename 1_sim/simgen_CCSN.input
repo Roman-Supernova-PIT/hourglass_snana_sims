@@ -8,6 +8,9 @@ GENMODEL:  NON1ASED
 PATH_NON1ASED:  $PLASTICC_ROOT/model_libs_updates/NON1ASED.V19_CC+HostXT
 DNDZ:  CC_S15                   # Strolger 2015 (1509.06574)
 
+TAKE_SPECTRUM(WIDE):     MJD(55000:55635:5)  TEXPOSE_ZPOLY(900)
+TAKE_SPECTRUM(DEEP):     MJD(55000:55635:5)  TEXPOSE_ZPOLY(3600)
+
 #INPUT_FILE_INCLUDE: $SNDATA_ROOT/models/NON1ASED/NON1ASED.V19_CC+HostXT/SIMGEN_INCLUDE_NON1A.INPUT  #this file has PEC1A (91bg templates as well)
 # -----------------------------------------
 # TEMPLATES presented in Vincenzi et al. 2019 (arXiv:1908.05228)

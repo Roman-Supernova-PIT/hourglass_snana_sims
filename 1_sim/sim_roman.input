@@ -7,7 +7,12 @@ SIMLIB_FILE:   /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/roman_
 SOLID_ANGLE: 0.0  # set in simlib
 GENRANGE_PEAKMJD:  54930.0 55775.0
 KCOR_FILE:  /project2/rkessler/SURVEYS/WFIRST/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits  # new filters changed 6/16 PM
-GENFILTERS:  YJHFZR   
+GENFILTERS:  YJHFZR
+# These should be here, but SNANA breaks if they are used with a SIMSED. Moving these
+# to simgen_CCSN.input and simgen_SNIa.input.
+# These should also only be for ~10% of the targets and not 100%, as currenlty writen.
+# TAKE_SPECTRUM(WIDE):     MJD(55000:55635:5)  TEXPOSE_ZPOLY(900)
+# TAKE_SPECTRUM(DEEP):     MJD(55000:55635:5)  TEXPOSE_ZPOLY(3600)
 
 
 ####### Simulation Generation ##########

@@ -1,0 +1,45 @@
+GLOBAL:
+    # Name                      # scale  # command and arguments
+    #SALT20_cal:                 0.3      FITMODEL_NAME  '$PS1_ROOT/models/SALT2/SALT2.sys0'
+    #SALT21_cal:                 0.3      FITMODEL_NAME  '$PS1_ROOT/models/SALT2/SALT2.sys1'
+    #SALT22_cal:                 0.3      FITMODEL_NAME  '$PS1_ROOT/models/SALT2/SALT2.sys2'
+    #SALT23_cal:                 0.3      FITMODEL_NAME  '$PS1_ROOT/models/SALT2/SALT2.sys3'
+    #SALT24_cal:                 0.3      FITMODEL_NAME  '$PS1_ROOT/models/SALT2/SALT2.sys4'
+    #SALT25_cal:                 0.3      FITMODEL_NAME  '$PS1_ROOT/models/SALT2/SALT2.sys5'
+    #SALT26_cal:                 0.3      FITMODEL_NAME  '$PS1_ROOT/models/SALT2/SALT2.sys6'
+    #SALT27_cal:                 0.3      FITMODEL_NAME  '$PS1_ROOT/models/SALT2/SALT2.sys7'
+    #SALT28_cal:                 0.3      FITMODEL_NAME  '$PS1_ROOT/models/SALT2/SALT2.sys8'
+    #SALT29_cal:                 0.3      FITMODEL_NAME  '$PS1_ROOT/models/SALT2/SALT2.sys9'
+    MWEBV:                      1.0      MWEBV_SCALE 0.95  MWEBV_SHIFT  0.00
+    HST_cal:                    1.0      MAGOBS_SHIFT_ZP_PARAMS 0 0.00714 0
+    zshift:                     0.4      REDSHIFT_FINAL_SHIFT 0.0001
+    #VPEC:                       1.0      VPEC_FILE '$DES_ROOT/simlibs/VPEC_sys.TXT' # Combines lowz and Foundation
+
+FOUNDATION:
+    # Name                      # scale  # command and arguments
+    PS1_wave_g_SURVCAL:         0.7      FILTER_LAMSHIFT 'g 10'  # 10 Angstrom wavelength shift
+    PS1_wave_r_SURVCAL:         0.7      FILTER_LAMSHIFT 'r 10'
+    PS1_wave_i_SURVCAL:         0.7      FILTER_LAMSHIFT 'i 10'
+    PS1_ZP_g_SURVCAL:           0.3      MAGOBS_SHIFT_ZP 'g 0.01'
+    PS1_ZP_r_SURVCAL:           0.3      MAGOBS_SHIFT_ZP 'r 0.01'
+    PS1_ZP_i_SURVCAL:           0.3      MAGOBS_SHIFT_ZP 'i 0.01'
+
+NGRST:
+    # Name                      # scale  # command and arguments
+    #TESTnozband:                1.0      FILTLIST_FIT 'gri'
+    NGRST_ZP_r_survcal:           0.2      MAGOBS_SHIFT_ZP 'R .002'
+    NGRST_ZP_z_survcal:           0.2      MAGOBS_SHIFT_ZP 'Z .002'
+    NGRST_ZP_y_survcal:           0.2      MAGOBS_SHIFT_ZP 'Y .002'
+    NGRST_ZP_j_survcal:           0.2      MAGOBS_SHIFT_ZP 'J .002'
+    NGRST_ZP_h_survcal:           0.2      MAGOBS_SHIFT_ZP 'H .002'
+    NGRST_ZP_f_survcal:           0.2      MAGOBS_SHIFT_ZP 'F .002'
+    NGRST_wave_r_survcal:         0.6      FILTER_LAMSHIFT 'R 2'
+    NGRST_wave_z_survcal:         0.6      FILTER_LAMSHIFT 'Z 2'
+    NGRST_wave_y_survcal:         0.6      FILTER_LAMSHIFT 'Y 2'
+    NGRST_wave_j_survcal:         0.6      FILTER_LAMSHIFT 'J 2'
+    NGRST_wave_h_survcal:         0.6      FILTER_LAMSHIFT 'H 2'
+    NGRST_wave_f_survcal:         0.6      FILTER_LAMSHIFT 'F 2'
+    #NGRST_noHOSTNOISE:            1.0      FUDGE_HOSTNOISE_FILE ' '
+    #NGRST_survcal_PS1COHERENT:    1.0      MAGOBS_SHIFT_ZP 'g -0.00756 r 0.0007 i 0.00425 z -0.00208'
+
+

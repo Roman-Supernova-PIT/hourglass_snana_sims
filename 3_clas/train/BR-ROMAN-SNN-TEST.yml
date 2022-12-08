@@ -1,0 +1,38 @@
+# Using the Roman High Latitude Time Domain Reference survey (Rose+2021), 
+# Track down issues with SNN and Pippin
+  
+SIM:
+  SN_Ia:
+    IA_SALT3:
+      BASE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/simgen_SNIa.input
+    GLOBAL:
+      FORMAT_MASK: 48
+      NGEN_UNIT: 0.05
+      RANSEED_REPEAT: 1 12345
+      BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 1
+LCFIT:
+  ROMAN_LCFIT:
+    MASK: SN_Ia
+    BASE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/2_sim/SIMFIT_ROMAN.nml
+    FITOPTS: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/2_sim/global.yml
+    SNLCINP:
+    USE_MINOS: F
+    OPTS:
+      APPEND_TABLE_VARLIST: RA DEC TGAPMAX TrestMIN TrestMAX
+      BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 12
+      OPT_SNCID_LIST: 1
+
+CLASSIFICATION:
+  SNN:
+    CLASSIFIER: SuperNNovaClassifier
+    MODE: predict
+    GPU: True # Or False - determines which queue it gets sent into - (False if <30k)
+    CLEAN: True # Or false - determine if Pippin removes the processed folder to save space
+    MASK: SN_IA
+    OPTS:
+      MODEL: SNN_TRAIN  # Havent shown this defined. Or /somepath/to/model.pt
+      VARIANT: vanilla # or "variational" or "bayesian". Defaults to "vanilla"
+      REDSHIFT: True  # Use redshift info when classifying. Defaults to True.
+      NORM: cosmo_quantile  # How to normalise LCs. Other options are "perfilter", "cosmo", "global" or "cosmo_quantile".  
+      CYCLIC: True  # Defaults to True for vanilla and variational model
+      SEED: 0  # Sets random seed. Defaults to 0.
