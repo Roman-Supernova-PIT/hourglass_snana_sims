@@ -19,22 +19,26 @@ SIM:
     GLOBAL:
       FORMAT_MASK: 48
       NGEN_UNIT: 1
-      RANSEED_REPEAT: 20 12345
-      BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 20
-      
+      # This can be cut down if you don't use SNN. But then change "CLASSIFICATION: SCORE_TRAIN: OPTS: SIM_FRACTION:"
+      # Should be 20 jobs if you are training SNN.
+      RANSEED_REPEAT: 4 12452035
+      BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 4
+
 CLASSIFICATION:
-  SNN_TRAIN:
-    CLASSIFIER: SuperNNovaClassifier
-    MODE: train
-    GPU: True # always when training
-    CLEAN: True # Or false - determine if Pippin removes the processed folder to save space
-    MASK_SIM: TRAIN
-    OPTS:
-      VARIANT: vanilla # or "variational" or "bayesian". Defaults to "vanilla"
-      REDSHIFT: True  # Use redshift info when classifying. Defaults to True.
-      NORM: cosmo_quantile  # How to normalise LCs. Other options are "perfilter", "cosmo", "global" or "cosmo_quantile".  
-      CYCLIC: True  # Defaults to True for vanilla and variational model
-      SEED: 0  # Sets random seed. Defaults to 0.
+  # SNN_TRAIN:
+      # currently does not work.
+  #   CLASSIFIER: SuperNNovaClassifier
+  #   MODE: train
+  #   GPU: True # always when training
+  #   CLEAN: True # Or false - determine if Pippin removes the processed folder to save space
+  #   MASK: TRAIN
+  #   OPTS:
+  #     VARIANT: vanilla # or "variational" or "bayesian". Defaults to "vanilla"
+  #     REDSHIFT: True  # Use redshift info when classifying. Defaults to True.
+  #     NORM: cosmo_quantile  # How to normalise LCs. Other options are "perfilter", "cosmo", "global" or "cosmo_quantile".  
+  #     CYCLIC: True  # Defaults to True for vanilla and variational model
+  #     SEED: 0  # Sets random seed. Defaults to 0.
+  #     LIST_FILTERS: ['R', 'Z', 'Y', 'J', 'H', 'F']
       
   SCONE_TRAIN:
     CLASSIFIER: SconeClassifier
@@ -43,5 +47,5 @@ CLASSIFICATION:
     OPTS:
       GPU: False
       NUM_EPOCHS: 100
-      SIM_FRACTION: 10  # only need 1/10 the sim size as SNN.
+      # SIM_FRACTION: 5  # only need 1/5 the sim size as SNN. # use ~4 in BATCH_INFO
       KCOR_FILE: /project2/rkessler/SURVEYS/WFIRST/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits

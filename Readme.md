@@ -1,4 +1,4 @@
-# Simulating Roman Transients with SNANA
+# Simulating the Roman High Latitude Time Domain Survey with SNANA
 
 ```
    ___                         _____  __ 
@@ -7,26 +7,57 @@
 /_/|_|\___/_/_/_/\_,_/_//_/ /___/_/|_/
 ```
 
-These are the input files for [SNANA]/[Pippin] catalog-level simulations of the Roman High-Latitude Time Domain reference survey as presented in [2111.03081](https://ui.adsabs.harvard.edu/abs/2021arXiv211103081R/abstract). They allow for the simulations of extra-galactic transients, as may be observed by the Roman Space Telescope.
+These are the input files for [SNANA]/[Pippin] catalog-level simulations of the Roman High-Latitude Time Domain reference survey as presented in [2111.03081](https://ui.adsabs.harvard.edu/abs/2021arXiv211103081R/abstract). They allow for the simulations of extra-galactic transients as may be observed by the Roman Space Telescope. These simulations allow for both the creation of a full transient catalog and a supernova cosmology pipeline.
+
+[SNANA]: https://github.com/RickKessler/SNANA
+[Pippin]: https://github.com/dessn/Pippin
 
 ## Usage
 
-The intened use, for most people, is to analyse the resulting simulations (data release to come) rather than modify the input files themselves themeselves. Though, if you intened to look at variations in the simulations, you can use these input files wherever you have access to SNANA. I would recommend running on Midway (operated by U. Chicago) or contacting one of the (contributors)[#Contributors] and asking them to run the simulations.
+To generate a full transient (>12 types) catalog, run
+```
+pippin.sh {your initials}-ROMAN-TRANS.yml
+```
 
-1. Change the name of the .yml file to avoid overwriting other simulations., e.g. 'BR-ROMAN_TRANS.yml --> {your initials}-ROMAN_TRANS.yml'
-2. Check the config file before launching with 
+The supernova cosmology pipeline can be run via 
 ```
-pippin.sh -c {your initials}-ROMAN_TRANS.yml
+pippin.sh {your initials}-ROMAN-COSMO.yml
 ```
-3. Read the Pippin [best practices](https://pippin.readthedocs.io/en/latest/usage.html#best-practice).
-4. Run pipeline with
+
+I recommend that you read the Pippin [best practices](https://pippin.readthedocs.io/en/latest/usage.html#best-practice) and follow those when running these simulations.
+
+The intended use, for most people, is to analyses the resulting simulations via a data release, rather than modify the input files themselves themselves. Though, if you intend to look at variations in the simulations, you can use these input files wherever you have access to SNANA. I would recommend running on Midway (operated by U. Chicago), NERSC, or contacting one of the (contributors)[#Contributors] and asking them to run the simulations.
+
+### Requirements
+
+* [SNANA]
+* [Pippin]
+* git
+
+### Set up
+
+Full set up:
+
+1. Download via `git clone https://github.com/benjaminrose/roman_snana_sims.git`
+1. Change the name of PIPPIN_ROMAN_TRANS.yml and PIPPIN_ROMAN_COSMO.yml files to avoid overwriting other simulations., e.g. PIPPIN_ROMAN_TRANS.yml --> {your initials}_ROMAN_TRANS.yml
+1. Add an environment variable (`HLTDS_SIM_BASE_PATH`) that points to the location to your simulation input files. This variable needs to be in your startup script (i.e. .bashrc) so that batch jobs also see it.
+  - You can do this with `echo "export HLTDS_SIM_BASE_PATH=$(pwd)" >> ~/.bashrc`
+1. Check that your setup is correct with ... (pippin.sh -c, HLTDS_SIM_BASE_PATH exits, and file name has changed)
+1. Check the pipeline files before launching simulations
 ```
-pippin.sh {your initials}-ROMAN_TRANS.yml
+pippin.sh -c {your initials}_ROMAN_TRANS.yml
 ```
+
+In the future, we hope that you can point to a managed version of these files rather then cloning the entire repo.
+
+### Update to the latest sims
+
+1. `git pull`
+1. Again, rename PIPPIN_ROMAN_*.yml files
 
 ## Support
 
-Currently there should be a minimal expectation of support. In time, we hope to make this releasable with a full support structure. For now, these exist publically more as a reference than for broad usage.
+Currently there should be a minimal expectation of support. In time, we hope to make this releasable with a full support structure. For now, these exist publicly more as a reference than for broad usage.
 
 ## Project Structure
 
@@ -68,6 +99,8 @@ These files follow the SNANA pipeline nomenclature as defined by PIPPIN.
 
 ### (Re-)Creating SIMSED_BINARIES
 
+*This is no longer needed now that we are using NON1ASED rather then binaries.
+
 This needs to be redone with every update to the filters (the kcor file) or the simulation (the simlib file).
 
 - go to `/project2/rkessler/SURVEYS/LSST/ROOT/PLASTICC/model_libs/SIMSED_BINARIES/config_NGRST`
@@ -82,3 +115,8 @@ This needs to be redone with every update to the filters (the kcor file) or the 
 - Rebekah Hounsell
 - Phil Macias
 - Rick Kessler
+
+## Known issues
+
+- 4.00 is the max redshift in SNANA & rates are only measured to 3.0 & normalization is not working past 2.99
+- low-z input file needs to not have redundant SNIa information (i.e. GENALPHA_SALT2, GENMODEL, ...)

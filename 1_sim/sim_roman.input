@@ -3,16 +3,13 @@ DOCUMENTATION_END:
 
 
 #### ROMAN HLTD REFERENCE SURVEY ####
-SIMLIB_FILE:   /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/roman_ref.simlib
+SIMLIB_FILE:   /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/rose21_20_percent.simlib
 SOLID_ANGLE: 0.0  # set in simlib
-GENRANGE_PEAKMJD:  54930.0 55775.0
+GENRANGE_PEAKMJD:  60950 61740
 KCOR_FILE:  /project2/rkessler/SURVEYS/WFIRST/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits  # new filters changed 6/16 PM
 GENFILTERS:  YJHFZR
-# These should be here, but SNANA breaks if they are used with a SIMSED. Moving these
-# to simgen_CCSN.input and simgen_SNIa.input.
-# These should also only be for ~10% of the targets and not 100%, as currenlty writen.
-# TAKE_SPECTRUM(WIDE):     MJD(55000:55635:5)  TEXPOSE_ZPOLY(900)
-# TAKE_SPECTRUM(DEEP):     MJD(55000:55635:5)  TEXPOSE_ZPOLY(3600)
+#TAKE_SPECTRUM(WIDE-PRISM):     MJD(61000:61725:10)  TEXPOSE_ZPOLY(900)
+#TAKE_SPECTRUM(DEEP-PRISM):     MJD(61000:61725:10)  TEXPOSE_ZPOLY(3600)
 
 
 ####### Simulation Generation ##########
@@ -28,9 +25,9 @@ SMEARFLAG_ZEROPT:  1  # smear zero-point with zptsig
 
 
 #### Selection ####
-SEARCHEFF_PIPELINE_LOGIC_FILE: $WFIRST_ROOT/models/searcheff/SEARCHEFF_PIPELINE_LOGIC.DAT
+SEARCHEFF_PIPELINE_LOGIC_FILE:  /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/SEARCHEFF_PIPELINE_LOGIC.DAT
 SEARCHEFF_PIPELINE_EFF_FILE:   $WFIRST_ROOT/models/searcheff/SEARCHEFF_PIPELINE_WFIRST.DAT
-SEARCHEFF_SPEC_FILE:  SEARCHEFF_SPEC_ZERO.DAT
+#SEARCHEFF_SPEC_FILE:  SEARCHEFF_SPEC_ZERO.DAT
 #SEARCHEFF_SPEC_SCALE: ZERO
 NEWMJD_DIF: 0.4
 
@@ -43,7 +40,7 @@ HOSTLIB_MSKOPT: 10 # 2 for poisson, 256 init verbose
 HOSTLIB_FIXRAN_RADIUS: 0.0 # fix radial random number (0-1)
 HOSTLIB_SBRADIUS: 0.2 
 SEARCHEFF_zHOST_FILE:  /project2/rkessler/SURVEYS/WFIRST/USERS/pmacias/dev/sim/searcheff/dust/new/roman_deep+subaru
-APPLY_SEARCHEFF_OPT: 5
+APPLY_SEARCHEFF_OPT: 0   # some how this is removing a lot of objects, more then it should.
 APPLY_CUTWIN_OPT: 0
 
 
@@ -59,7 +56,7 @@ H0:           70.0
 #### Simulation Output Options #####
 FORMAT_MASK: 48   # FITS output + RANDOM CID
 # What should be put in the summary text "dump" file?
-SIMGEN_DUMPALL:  29
+SIMGEN_DUMPALL:  31
   CID FIELD GENTYPE  SNTYPE  NON1A_INDEX  ZCMB
   LIBID RA DECL MWEBV MU PEAKMJD
   MAGT0_Y MAGT0_J 
@@ -67,7 +64,8 @@ SIMGEN_DUMPALL:  29
   SNRMAX SNRMAX2 SNRMAX3 
   NOBS TRESTMIN TRESTMAX TGAPMAX  
   CUTMASK  SIM_SEARCHEFF_MASK
-  logmass ZTRUE logsfr LENSDMU
+  ZTRUE logsfr LENSDMU HOSTMAG_H 
+  logmass logssfr
   
   
 #### Not Needed ####  

@@ -7,10 +7,14 @@ GENTYPE: 50
 
 # Alex Gagliano 10/06/21 Added RV Keys
 
-GENMODEL:  $PLASTICC_MODELS/SIMSED.KN-K17
+#GENMODEL:  $PLASTICC_MODELS/SIMSED.KN-K17
+GENMODEL: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/NON1ASED/NON1ASED.KN-K17
 
-SIMSED_USE_BINARY:   1
-SIMSED_PATH_BINARY:  $PLASTICC_MODELS/SIMSED_BINARIES
+
+# SIMSED_USE_BINARY:   1
+# SIMSED_PATH_BINARY:  $PLASTICC_MODELS/SIMSED_BINARIES
+INPUT_INCLUDE_FILE:  /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/NON1ASED/KN-mosfit.input
+
 
 # Extinction from WV07 model, with half expon component
 # to approximately account for large kicks.

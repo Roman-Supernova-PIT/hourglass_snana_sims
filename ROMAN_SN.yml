@@ -1,0 +1,13 @@
+ROMAN_SN_Ia: &roman_sn_ia
+  # TASK1: SNIa are apart of the PLAsTiCC-like transients simulations
+  # TASK2: This is the main data set used in the cosmological analysis
+  IA_SALT3:
+    BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_SNIa.input
+
+ROMAN_SN_CC: &roman_sn_cc
+  CC_TEMPLATES: # II, IIn, IIb, Ib, Ic, Ic-BL
+    BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_CCSN.input
+  SN91bg_TEMPLATES:
+    BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_SNIa_91bg.input
+  Iax_TEMPLATES:
+   BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_SNIax.input

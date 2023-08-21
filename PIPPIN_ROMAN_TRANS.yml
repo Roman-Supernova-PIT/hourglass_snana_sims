@@ -1,0 +1,93 @@
+# Using the Roman High Latitude Time Domain Reference survey (Rose+2021), 
+# to create simulations of ~12 transient types.
+#
+# Usage:
+# - Best if set up with `hltds_sim.py init`
+# - Ensure file name is unique per user and that $HLTDS_SIM_BASE_PATH has been updated.
+# - Check that this file is Pippin compliant with `pippin.sh -c {file}.yml`.
+# - Run this file with `pippin.sh -v {file}.yml`.
+# - For a list of PIPPIN best practices, read https://pippin.readthedocs.io/en/latest/usage.html#best-practice
+#
+# %include: ROMAN_SN.yml%
+
+ALIAS:
+  COSMOLOGY: &cosmology
+      OMEGA_MATTER: 0.315
+      OMEGA_LAMBDA: 0.685
+      w0_LAMBDA:     -1.0
+      wa_LAMBDA:        0
+      H0:            70.0
+  
+  MWOPT: &mwopt
+      RV_MWCOLORLAW: 3.1
+      OPT_MWCOLORLAW: 99
+      OPT_MWEBV: 3
+  
+SIM:
+  # ROMAN_PLAsTiCC:
+  #   SLSN_TEMPLATES:
+  #     BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_SLSN.input
+  #     GENRANGE_REDSHIFT:  0.02  2.90  #host-lib limiting.
+  #   TDE_TEMPLATES:
+  #     BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_TDE.input
+  #     GENRANGE_REDSHIFT:  0.02  2.00
+  #   ILOT_TEMPLATES:
+  #    BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_ILOT.input
+  #    GENRANGE_REDSHIFT:  0.02  1.00
+  #    GENRANGE_TREST:    -20.0   30.0   #fix crazy-flux
+  #   CART_TEMPLATES:
+  #    BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_CART.input
+  #    GENRANGE_REDSHIFT:  0.02  2.00
+  #   # Need to update to newer KN models
+  #   # KN_TEMPLATES:
+  #   #  BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_KN.input
+  #   #  GENRANGE_REDSHIFT:  0.02  1.20
+  #   #  GENRANGE_TREST:    -0.3   6.0   #fix crazy-flux
+  #   PISN_TEMPLATES:
+  #    BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_PISN.input
+  #    GENRANGE_REDSHIFT:  0.02  2.90  #host-lib limiting.
+  #   AGN_TEMPLATES:
+  #    BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_AGN.input
+  #    GENRANGE_REDSHIFT:  0.02  2.90  #host-lib limiting.
+  #    GENRANGE_TREST:    -100   500
+  #   GLOBAL:
+  #     # 0.01 sees no SLSN and TDE.
+  #     NGEN_UNIT: 1
+  #     RANSEED_REPEAT: 1 12345
+  #     BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 1
+  #     SIMLIB_FILE: $HLTDS_SIM_BASE_PATH/1_sim/roman_ref.simlib
+  #     <<: *cosmology
+  #     <<: *mwopt
+  
+  SN:
+    <<: *roman_sn_cc
+    <<: *roman_sn_ia
+    GLOBAL:
+      NGEN_UNIT: 0.1
+      RANSEED_REPEAT: 10 12345
+      BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 10
+      <<: *cosmology
+      <<: *mwopt
+
+CLASSIFICATION:
+    # PERFECT:
+    #   CLASSIFIER: PerfectClassifier
+    #   MODE: predict
+    #   MASK_SIM: SN
+    #   OPTS:
+    #     PROB_IA: 1.0  # Probs to use for Ia events, default 1.0
+    #     PROB_CC: 0.0  # Probs to use for CC events, default 0.0
+  
+    SCONE:
+      CLASSIFIER: SconeClassifier
+      MASK_SIM: SN
+      MODE: predict
+      OPTS:
+        # currently, does not work with $HLTDS_SIM_BASE_PATH
+        MODEL: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/3_clas/models/scone
+        NUM_EPOCHS: 5
+        KCOR_FILE: /project2/rkessler/SURVEYS/WFIRST/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits
+
+AGGREGATION:
+  AGG:
+    MASK_SIM: SN

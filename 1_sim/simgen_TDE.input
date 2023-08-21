@@ -7,7 +7,8 @@ GENTYPE: 42
 
 # TDE from MOSFIT group
 
-GENMODEL: $PLASTICC_MODELS/SIMSED.TDE-MOSFIT
+#GENMODEL: $PLASTICC_MODELS/SIMSED.TDE-MOSFIT
+GENMODEL: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/NON1ASED/NON1ASED.TDE-MOSFIT
 #GENAV_WV07:   1      # WV07, Eq. 2
 GENTAU_AV:    0.4     # expon component only, no Gauss core
 GENRANGE_AV:  0 3     # CCM89 AV-extinctionrange
@@ -16,8 +17,20 @@ GENPEAK_RV:   3.1
 GENRANGE_RV:  1.0  5.0
 GENSIGMA_RV:  0.0  0.0
 
-SIMSED_USE_BINARY:   1
-SIMSED_PATH_BINARY:  $PLASTICC_MODELS/SIMSED_BINARIES
+# SIMSED_USE_BINARY:   1
+# SIMSED_PATH_BINARY:  $PLASTICC_MODELS/SIMSED_BINARIES
+INPUT_INCLUDE_FILE:  /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/NON1ASED/TDE-mosfit.input
+#NON1A_KEYS: 5 
+#         INDEX   WGT    MAGOFF   MAGSMEAR  SNTYPE 
+#NON1A:    004    1.0   0.000     0.000      80  
+#NON1A:    502    1.0   0.000     0.000      80  
+#NON1A:    503    1.0   0.000     0.000      80  
+#NON1A:    504    1.0   0.000     0.000      80  
+#NON1A:    505    1.0   0.000     0.000      80  
+#NON1A:    506    1.0   0.000     0.000      80  
+#NON1A:    507    1.0   0.000     0.000      80  
+#NON1A:    508    1.0   0.000     0.000      80  
+#NON1A:    509    1.0   0.000     0.000      80  
 
 # Volumetric rate from 1707.03458, (8 +- 4) × 10−7 /Mpc^3/yr
 # z-dependence from
