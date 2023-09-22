@@ -104,11 +104,3 @@ NON1A:          736  0.001835    1.06      1.18    35  ## Ic-BL    SN2009bb
 # so force min mag/day slope for late-time extrapolation.
 MINSLOPE_EXTRAPMAG_LATE: 0.01
 
-CIDOFF: 20000
-
-CUTWIN_TRESTMIN: -19 -5         #at least 1 epoch before -5 d (rest-frame)
-CUTWIN_TRESTMAX: +30 +80        #at least 1 epoch past +30 d
-CUTWIN_TGAPMAX:   0   20        #largest Trest gap (days)
-CUTWIN_T0GAPMAX:  0   10        #largest Trest gap near peak (days)
-
-# -------

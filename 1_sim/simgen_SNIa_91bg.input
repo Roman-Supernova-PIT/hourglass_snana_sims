@@ -5,16 +5,16 @@ DOCUMENTATION_END:
 INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/sim_roman.input
 
 GENTYPE: 11
-#GENMODEL: $PLASTICC_ROOT/model_libs_updates/SIMSED.SNIa-91bg
-#SIMSED_USE_BINARY:   1
-#SIMSED_PATH_BINARY:  $PLASTICC_MODELS/SIMSED_BINARIES
-GENMODEL: $HLTDS_SIM_BASE_PATH/1_sim/NON1ASED/NON1ASED.SNIa-91bg
-INPUT_INCLUDE_FILE:  $HLTDS_SIM_BASE_PATH/1_sim/NON1ASED/SNIa-91bg-mosfit.input
+GENMODEL: $PLASTICC_ROOT/model_libs_updates/NON1ASED.SNIa-91bg
+
+NON1A_KEYS: 5  INDEX  WGT  MAGOFF  MAGSMEAR SNTYPE
+NON1A:           0    1.0   0.0       0.00    42
+# index=0 -> do them all equally
 
 # Volumetric rate
 # 12% of Strolger 2020
-DNDZ: POWERLAW2 2.9E-6  1.55 0.0 1.0
-DNDZ: POWERLAW2 2.9E-6 -0.1 1.0 5.0
+DNDZ: POWERLAW2 3.6E-6  1.55 0.0 1.0
+DNDZ: POWERLAW2 11.3E-6 -0.1 1.0 5.0
 
 # Extinction
 # GN updated 20210321 per RK - these are Maria Vincenzi's Galaxy Extinction params
@@ -44,13 +44,3 @@ GENRANGE_color:  0.0 1.0
 SIMSED_REDCOR(stretch,color):  -0.656
 
 
-# ----- Not in PLASTICC
-
-CIDOFF: 20000
-
-CUTWIN_TRESTMIN: -19 -5         #at least 1 epoch before -5 d (rest-frame)
-CUTWIN_TRESTMAX: +30 +80        #at least 1 epoch past +30 d
-CUTWIN_TGAPMAX:   0   20        #largest Trest gap (days)
-CUTWIN_T0GAPMAX:  0   10        #largest Trest gap near peak (days)
-
-# -------

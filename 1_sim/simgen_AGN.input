@@ -15,16 +15,5 @@ DNDZ: MD14  6.0E-6      # MD14 SFR(z), with 6E-6/yr/Mpc^3 at z=0
 
 # restrict AGN redshift to ZTRUE range of G18 photo-z library
 LCLIB_CUTWIN:  REDSHIFT 0.05 3.45
-
-GENRANGE_MJD:  54930.0 55775.0
-
-# ---- Not in PLASTICC
-
-CIDOFF: 20000
-
-CUTWIN_TRESTMIN: -19 -5         #at least 1 epoch before -5 d (rest-frame)
-CUTWIN_TRESTMAX: +30 +80        #at least 1 epoch past +30 d
-CUTWIN_TGAPMAX:   0   20        #largest Trest gap (days)
-CUTWIN_T0GAPMAX:  0   10        #largest Trest gap near peak (days)
-
-# -------
+#GENRANGE_MJD: 60000    62000   #more than simlib's 61000 61725
+GENRANGE_MJD:  61000     61725   #more than simlib's 61000 61725

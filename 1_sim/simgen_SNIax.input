@@ -6,16 +6,16 @@ INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/s
 # SN~Iax from Saurabh, for PLASTICC
 
 GENTYPE: 12
-#GENSOURCE:   RANDOM 
-#GENMODEL: $PLASTICC_ROOT/model_libs_updates/SIMSED.SNIax
-GENMODEL: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/NON1ASED/NON1ASED.SNIax
-INPUT_INCLUDE_FILE:  /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/NON1ASED/SNIax-mosfit.input
+GENMODEL: $PLASTICC_ROOT/model_libs_updates/NON1ASED.SNIax
 
-# SIMSED_USE_BINARY:   1
-# SIMSED_PATH_BINARY:  $PLASTICC_MODELS/SIMSED_BINARIES
+NON1A_KEYS: 5  INDEX  WGT  MAGOFF  MAGSMEAR SNTYPE
+NON1A:           0    1.0   0.0       0.00    42
+# index=0 -> do them all equally
 
 # Volumetric rate
-DNDZ: MD14  6.0E-6      # MD14 SFR(z), with 6E-6/yr/Mpc^3 at z=0
+# DNDZ: MD14  6.0E-6      # MD14 SFR(z), with 6E-6/yr/Mpc^3 at z=0
+DNDZ: POWERLAW2 0.7E-5 1.55 0.0 1.0    #30% of Strolger 2020 SNIa rate
+DNDZ: POWERLAW2 2.3E-5 -0.1 1.0 5.0
 
 # Extinction
 # GN updated 20210321 per RK - these are Maria Vincenzi's Galaxy Extinction params
@@ -30,13 +30,3 @@ GENRATIO_AV0:     4.0
 # random pick of each SED sequence
 SIMSED_GRIDONLY:  Iax_INDEX
 
-# ----- Not in PLASTICC
-
-CIDOFF: 20000
-
-CUTWIN_TRESTMIN: -19 -5         #at least 1 epoch before -5 d (rest-frame)
-CUTWIN_TRESTMAX: +30 +80        #at least 1 epoch past +30 d
-CUTWIN_TGAPMAX:   0   20        #largest Trest gap (days)
-CUTWIN_T0GAPMAX:  0   10        #largest Trest gap near peak (days)
-
-# -------

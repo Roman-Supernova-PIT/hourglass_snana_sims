@@ -24,40 +24,42 @@ ALIAS:
       OPT_MWEBV: 3
   
 SIM:
-  # ROMAN_PLAsTiCC:
-  #   SLSN_TEMPLATES:
-  #     BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_SLSN.input
-  #     GENRANGE_REDSHIFT:  0.02  2.90  #host-lib limiting.
-  #   TDE_TEMPLATES:
-  #     BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_TDE.input
-  #     GENRANGE_REDSHIFT:  0.02  2.00
-  #   ILOT_TEMPLATES:
-  #    BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_ILOT.input
-  #    GENRANGE_REDSHIFT:  0.02  1.00
-  #    GENRANGE_TREST:    -20.0   30.0   #fix crazy-flux
-  #   CART_TEMPLATES:
-  #    BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_CART.input
-  #    GENRANGE_REDSHIFT:  0.02  2.00
-  #   # Need to update to newer KN models
-  #   # KN_TEMPLATES:
-  #   #  BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_KN.input
-  #   #  GENRANGE_REDSHIFT:  0.02  1.20
-  #   #  GENRANGE_TREST:    -0.3   6.0   #fix crazy-flux
-  #   PISN_TEMPLATES:
-  #    BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_PISN.input
-  #    GENRANGE_REDSHIFT:  0.02  2.90  #host-lib limiting.
-  #   AGN_TEMPLATES:
-  #    BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_AGN.input
-  #    GENRANGE_REDSHIFT:  0.02  2.90  #host-lib limiting.
-  #    GENRANGE_TREST:    -100   500
-  #   GLOBAL:
-  #     # 0.01 sees no SLSN and TDE.
-  #     NGEN_UNIT: 1
-  #     RANSEED_REPEAT: 1 12345
-  #     BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 1
-  #     SIMLIB_FILE: $HLTDS_SIM_BASE_PATH/1_sim/roman_ref.simlib
-  #     <<: *cosmology
-  #     <<: *mwopt
+  ROMAN_PLAsTiCC:
+    SLSN_TEMPLATES:
+      BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_SLSN.input
+      GENRANGE_REDSHIFT:  0.02  3.90  #host-lib limiting to 2.9?
+      GENRANGE_TREST: -100 500
+    TDE_TEMPLATES:
+      BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_TDE.input
+      GENRANGE_REDSHIFT:  0.02  2.00
+    ILOT_TEMPLATES:
+     BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_ILOT.input
+     GENRANGE_REDSHIFT:  0.02  2.90
+     GENRANGE_TREST:    -20.0   30.0   #fixes crazy-flux
+    CART_TEMPLATES:
+     BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_CART.input
+     GENRANGE_REDSHIFT:  0.02  2.90
+     GENRANGE_TREST:    -30.0   45.0   #fixes crazy-flux
+    KN_TEMPLATES:
+     BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_KN.input
+     GENRANGE_REDSHIFT:  0.01  1.50
+     GENRANGE_TREST:    -0.3   6.0   #fixes crazy-flux
+    PISN_TEMPLATES:
+     BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_PISN.input
+     GENRANGE_REDSHIFT:  0.02  3.90  #host-lib limiting to 2.9?
+     GENRANGE_TREST: -100 500
+    # AGN_TEMPLATES:
+    #  BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_AGN.input
+    #  GENRANGE_REDSHIFT:  0.02  2.90  #host-lib limiting.
+    #  GENRANGE_TREST:    -100   500
+    GLOBAL:
+      # 0.01 sees no SLSN and TDE.
+      NGEN_UNIT: 1
+      RANSEED_REPEAT: 1 12345
+      BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 1
+      # SIMLIB_FILE: $HLTDS_SIM_BASE_PATH/1_sim/roman_ref.simlib
+      <<: *cosmology
+      <<: *mwopt
   
   SN:
     <<: *roman_sn_cc
@@ -70,23 +72,23 @@ SIM:
       <<: *mwopt
 
 CLASSIFICATION:
-    # PERFECT:
-    #   CLASSIFIER: PerfectClassifier
-    #   MODE: predict
-    #   MASK_SIM: SN
-    #   OPTS:
-    #     PROB_IA: 1.0  # Probs to use for Ia events, default 1.0
-    #     PROB_CC: 0.0  # Probs to use for CC events, default 0.0
-  
-    SCONE:
-      CLASSIFIER: SconeClassifier
-      MASK_SIM: SN
+    PERFECT:
+      CLASSIFIER: PerfectClassifier
       MODE: predict
+      MASK_SIM: SN
       OPTS:
-        # currently, does not work with $HLTDS_SIM_BASE_PATH
-        MODEL: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/3_clas/models/scone
-        NUM_EPOCHS: 5
-        KCOR_FILE: /project2/rkessler/SURVEYS/WFIRST/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits
+        PROB_IA: 1.0  # Probs to use for Ia events, default 1.0
+        PROB_CC: 0.0  # Probs to use for CC events, default 0.0
+  
+    # SCONE:
+    #   CLASSIFIER: SconeClassifier
+    #   MASK_SIM: SN
+    #   MODE: predict
+    #   OPTS:
+    #     # currently, does not work with $HLTDS_SIM_BASE_PATH
+    #     MODEL: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/3_clas/models/scone
+    #     NUM_EPOCHS: 5
+    #     KCOR_FILE: /project2/rkessler/SURVEYS/WFIRST/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits
 
 AGGREGATION:
   AGG:

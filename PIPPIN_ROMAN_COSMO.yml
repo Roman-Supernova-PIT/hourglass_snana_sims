@@ -34,7 +34,7 @@ SIM:
       NGEN_UNIT: 1
       RANSEED_REPEAT: 1 12345
       BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 1
-      SIMLIB_FILE: $HLTDS_SIM_BASE_PATH/1_sim/roman_ref.simlib
+      # SIMLIB_FILE: $HLTDS_SIM_BASE_PATH/1_sim/roman_ref.simlib
       <<: *cosmology
       <<: *mwopt
 
@@ -45,7 +45,7 @@ SIM:
       NGEN_UNIT: 1
       RANSEED_REPEAT: 1 12345
       BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 1
-      SIMLIB_FILE: $HLTDS_SIM_BASE_PATH/1_sim/roman_ref.simlib
+      # SIMLIB_FILE: $HLTDS_SIM_BASE_PATH/1_sim/roman_ref.simlib
       <<: *cosmology
       <<: *mwopt
 
@@ -55,7 +55,7 @@ SIM:
       NGEN_UNIT: 0.1
       RANSEED_REPEAT: 50 12345
       BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 50
-      SIMLIB_FILE: $HLTDS_SIM_BASE_PATH/1_sim/roman_ref.simlib
+      # SIMLIB_FILE: $HLTDS_SIM_BASE_PATH/1_sim/roman_ref.simlib
       <<: *cosmology
       <<: *mwopt
 

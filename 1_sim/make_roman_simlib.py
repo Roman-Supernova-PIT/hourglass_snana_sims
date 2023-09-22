@@ -1,6 +1,7 @@
 """make_roamn_simlib.py
 
 Makes Roman High-Latitude simlib for SNANA
+Originally written by Ben Rose
 """
 
 from math import pi, floor
@@ -9,7 +10,7 @@ from math import pi, floor
 # SURVEY DEFINITION
 ###################
 SIMLIB_NAME = "rose21_20_percent.simlib"
-START_MJD = 61000  # approx
+START_MJD = 62000  # approx
 SURVEY_LENGTH = 365 * 2  # days
 CADENCE = 5  # days
 WIDE_FILTERS = ["R", "Z", "Y", "J"]
@@ -18,6 +19,8 @@ WIDE_TILES_wPRISM = 12
 DEEP_FILTERS = ["Y", "J", "H", "F"]
 DEEP_TILES = 15
 DEEP_TILES_wPRISM = 4
+RA_CENTER = ""  # not working
+DEC_CENTER = ""  # not working
 
 #############
 # NOISE & ZP
@@ -74,7 +77,7 @@ DEEP_ZPTAVG = {
 
 
 #####################################
-# General Instrament Characterizatoin
+# General Instrument Characterization
 #####################################
 
 PIXELS = {"R": 0.663, "Z": 0.663, "Y": 0.711, "J": 0.767, "H": 0.891, "F": 0.990}
@@ -82,8 +85,6 @@ FOCAL_PLANE_ACTIVE_AREA = 0.281  # sq-deg
 nvisits = floor(SURVEY_LENGTH / CADENCE)
 steradian = (180 / pi) ** 2  # sq-deg to steradian conversion factor
 solid_angle = (WIDE_TILES + DEEP_TILES) * FOCAL_PLANE_ACTIVE_AREA / steradian  # in str
-slew_time = 70    # seconds
-total_time = 
 
 
 ##################
@@ -92,7 +93,7 @@ total_time =
 
 HEADER = f"""DOCUMENTATION:
     PURPOSE:      Roman High Latitude Extragalactic Time Domain Reference Survey
-    INTENT:       Forcasting observed transients
+    INTENT:       Forcasting observed transients 
     USAGE_KEY:    SIMLIB_FILE 
     USAGE_CODE:   snlc_sim.exe 
     TIME_TOTAL:   144  # total survey time (photometry only), days (80% of 6 months is ~144 days)
@@ -109,7 +110,7 @@ DOCUMENTATION_END:
 
 # ---------------------------------- 
 
-SURVEY:   NGRST
+SURVEY:   ROMAN
 FILTERS:  RHFJYZ 
 PIXSIZE:  0.11  # arcsec 
 SOLID_ANGLE:  {solid_angle:.7}  # (sr) sum of all tiers
