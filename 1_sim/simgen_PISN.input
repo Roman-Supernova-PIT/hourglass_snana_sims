@@ -1,12 +1,19 @@
 DOCUMENTATION:
+  PURPOSE:    Simulating PISN in Roman
+  INTENT:     Nominal
+  USAGE_KEY:  simulation basefile
+  USAGE_CODE: snlc_sim.exe
+  NOTES:
+    - Pair-Instability SN model (from MOSFIT group)
+    - Nov 1 2021: add explicit RV
+  VERSIONS:
+    - DATE: Nov 30, 2023
+    - AUTHORS: Benjamin Rose
 DOCUMENTATION_END:
 
-INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/sim_roman.input
+INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/sim_roman.input
 
 GENTYPE: 59
-
-# Pair-Instability SN model (from MOSFIT group)
-# Nov 1 2021: add explicit RV
 
 GENMODEL: $PLASTICC_MODELS/NON1ASED.PISN-MOSFIT
 GENAV_WV07:   1       # WV07, Eq. 2
@@ -25,4 +32,4 @@ NON1A:           0    1.0   0.0       0.00    59
 # numbers from section 4.18.2 of Kessler+ 2019
 #DNDZ: ZPOLY 1.98E-9 6.38E-9 6.55E-9 -4.42E-9 0.8312E-9 -0.0508E-9  # yr-1 Mpc-3
 #for testing use
-DNDZ: MD14  1.98E-9      # MD14 SFR(z), with 2E-9/yr/Mpc^3 at z=0
+#DNDZ: MD14  1.98E-9      # MD14 SFR(z), with 2E-9/yr/Mpc^3 at z=0

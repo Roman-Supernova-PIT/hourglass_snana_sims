@@ -1,12 +1,17 @@
 DOCUMENTATION:
+  PURPOSE:    Simulating KN in Roman
+  INTENT:     Nominal
+  USAGE_KEY:  simulation input
+  USAGE_CODE: snlc_sim.exe
+  VERSIONS:
+  - DATE: Nov 30, 2023
+  - AUTHORS: Benjamin Rose
 DOCUMENTATION_END:
 
-INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/sim_roman.input
+INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/sim_roman.input
 
 GENTYPE: 50
 
-
-# GENMODEL:  $PLASTICC_MODELS/NON1ASED.KN-K17
 GENMODEL:  $PLASTICC_ROOT/model_libs_updates/NON1ASED.BULLA-BNS-M2-2COMP
 
 

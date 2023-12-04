@@ -1,12 +1,18 @@
 DOCUMENTATION:
+  PURPOSE:    Simulating CART from MOSFIT in Roman
+  INTENT:     Nominal
+  USAGE_KEY:  simulation input
+  USAGE_CODE: snlc_sim.exe
+  NOTES:
+    - Nov 1 2021 R.Kessler - Add explicit RV
+  VERSIONS:
+    - DATE: Nov 30, 2023
+    - AUTHORS: Benjamin Rose
 DOCUMENTATION_END:
 
-INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/sim_roman.input
+INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/sim_roman.input
 
 GENTYPE: 46
-
-# Ca Rich Transients (from MOSFIT group)
-# Nov 1 2021 R.Kessler - Add explicit RV
 
 GENMODEL: $PLASTICC_MODELS/NON1ASED.CART-MOSFIT
 GENAV_WV07:   1       # WV07, Eq. 2

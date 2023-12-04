@@ -1,21 +1,27 @@
 DOCUMENTATION:
+  PURPOSE:    Simulating ILOT in Roman
+  INTENT:     Nominal
+  USAGE_KEY:  simulation basefile
+  USAGE_CODE: snlc_sim.exe
+  NOTES:
+    - SN~Iax from Saurabh, for PLASTICC
+  VERSIONS:
+    - DATE: Nov 30, 2023
+    - AUTHORS: Benjamin Rose
 DOCUMENTATION_END:
 
-INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/sim_roman.input
-
-# SN~Iax from Saurabh, for PLASTICC
+INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/sim_roman.input
 
 GENTYPE: 12
 GENMODEL: $PLASTICC_ROOT/model_libs_updates/NON1ASED.SNIax
 
 NON1A_KEYS: 5  INDEX  WGT  MAGOFF  MAGSMEAR SNTYPE
-NON1A:           0    1.0   0.0       0.00    42
+NON1A:           0    1.0   0.0       0.00    12
 # index=0 -> do them all equally
 
 # Volumetric rate
-# DNDZ: MD14  6.0E-6      # MD14 SFR(z), with 6E-6/yr/Mpc^3 at z=0
 DNDZ: POWERLAW2 0.7E-5 1.55 0.0 1.0    #30% of Strolger 2020 SNIa rate
-DNDZ: POWERLAW2 2.3E-5 -0.1 1.0 5.0
+DNDZ: POWERLAW2 2.3E-5 -0.1 1.0 7.0
 
 # Extinction
 # GN updated 20210321 per RK - these are Maria Vincenzi's Galaxy Extinction params

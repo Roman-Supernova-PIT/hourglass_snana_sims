@@ -77,29 +77,41 @@ These files follow the SNANA pipeline nomenclature as defined by PIPPIN.
    - train/ - contains PIPPIN pipelines to train (and validate the training) of photometric classifiers to work with Roman data.
 - 6_biascor/
    - BBC_ROMAN.input - settings for the BBC step in the SN cosmology pipeline.
-- BR-ROMAN_TRANS.yml - Pippin pipeline file used to run these simulations.
+- PIPPIN_ROMAN_TRANS.yml - Pippin pipeline file used to run these simulations.
 
 ### Simulations files that are stored outside this folder
 
-- `/project2/rkessler/SURVEYS/LSST/ROOT/PLASTICC/model_libs/SIMSED_BINARIES/`
-   - Binaries of the transient SEDs (built for a given survey/filter set)
-- `/project2/rkessler/SURVEYS/DES/ROOT/analysis_photoIa_5yr/base/foundation/sims_ia/found_yse.simlib`
-   - Definition of the Foundation survey's observations
-- `/project2/rkessler/SURVEYS/WFIRST/ROOT/SALT3-NIR_dev/SALT3.P22-NIR`
-   - Currently using a SALT model that is not packaged with SNANA.
-- `/project2/rkessler/SURVEYS/WFIRST/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits`
-   - Filters (and prism) definitions
-- `/project2/rkessler/SURVEYS/WFIRST/ROOT/starterKits/sim_host_redshift/3dhst_sim_input_cat_v1.7.hostlib`
-   - host galaxy population/
-- /project2/rkessler/SURVEYS/WFIRST/ROOT/models/searcheff/SEARCHEFF_PIPELINE_LOGIC.DAT
-- /project2/rkessler/SURVEYS/WFIRST/ROOT/models/searcheff/SEARCHEFF_PIPELINE_WFIRST.DAT
-- /project2/rkessler/SURVEYS/WFIRST/ROOT/starterKits/sim_host_redshift/AKARI+specbasis_v1.5.1.WGTMAP
-- Several files in sim_foundation.input
+- Filter and prism definitions
+  - /project2/rkessler/SURVEYS/ROMAN/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits
+- Selection
+  - /project2/rkessler/SURVEYS/ROMAN/ROOT/models/searcheff/SEARCHEFF_PIPELINE_WFIRST.DAT
+- Host galaxies
+  - /project2/rkessler/SURVEYS/ROMAN/ROOT/starterKits/sim_host_redshift/AKARI+specbasis_v1.5.1.HOSTLIB.gz
+  - (referenced but not used) /project2/rkessler/SURVEYS/ROMAN/USERS/pmacias/dev/sim/searcheff/dust/new/roman_deep+subaru
+- Transient Models
+  - /project2/rkessler/PRODUCTS/SNDATA_ROOT/models/NON1ASED/NON1ASED.P18_CC
+  - /project2/rkessler/SURVEYS/ROMAN/ROOT/SALT3-NIR_dev/SALT3.P22-NIR
+  - /project2/rkessler/SURVEYS/LSST/ROOT/PLASTICC/
+    - model_libs/NON1ASED.TDE-MOSFIT
+    - model_libs/NON1ASED.CART-MOSFIT
+    - model_libs_updates/NON1ASED.V19_CC+HostXT
+    - model_libs/NON1ASED.ILOT-MOSFIT
+    - model_libs_updates/NON1ASED.BULLA-BNS-M2-2COMP
+    - model_libs_updates/NON1ASED.SNIax
+    - model_libs_updates/NON1ASED.SNIa-91bg
+    - model_libs/NON1ASED.PISN-MOSFIT
+    - model_libs/NON1ASED.TDE-MOSFIT
+    - model_libs/NON1ASED.SLSN-I-MOSFIT
+- Definition of the Foundation survey's observations
+  - to be determined.  
 
+
+### Converting SIMSED_BINARIES to NON1ASED
 
 ### (Re-)Creating SIMSED_BINARIES
 
-*This is no longer needed now that we are using NON1ASED rather then binaries.
+<details>
+<summary>This is no longer needed now that we are using NON1ASED rather then binaries.</summary>
 
 This needs to be redone with every update to the filters (the kcor file) or the simulation (the simlib file).
 
@@ -107,6 +119,8 @@ This needs to be redone with every update to the filters (the kcor file) or the 
 - run `make_simsed_binaries.py make_simsed_binaries_NGRST.yaml >& make_simsed_binaries_NGRST.LOG`
 - check that all the new SIMSED binary files have been created
 - cp them one folder up
+
+</details>
 
 ## Contributors
 
@@ -118,5 +132,4 @@ This needs to be redone with every update to the filters (the kcor file) or the 
 
 ## Known issues
 
-- 4.00 is the max redshift in SNANA & rates are only measured to 3.0 & normalization is not working past 2.99
 - low-z input file needs to not have redundant SNIa information (i.e. GENALPHA_SALT2, GENMODEL, ...)

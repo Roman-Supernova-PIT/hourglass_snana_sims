@@ -1,15 +1,22 @@
-INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/sim_roman.input
+DOCUMENTATION:
+  PURPOSE:    Simulating SNIa in Roman
+  INTENT:     Nominal
+  USAGE_KEY:  simulation basefile
+  USAGE_CODE: snlc_sim.exe
+  VERSIONS:
+    - DATE: Nov 30, 2023
+    - AUTHORS: Benjamin Rose
+DOCUMENTATION_END:
+
+INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/sim_roman.input
 
 GENTYPE: 10
 GENMODEL:    SALT3.K21
 GENSOURCE:   RANDOM
-GENMODEL: /project2/rkessler/SURVEYS/WFIRST/ROOT/SALT3-NIR_dev/SALT3.P22-NIR
-
-TAKE_SPECTRUM(WIDE):     MJD(55000:55635:5)  TEXPOSE_ZPOLY(900)
-TAKE_SPECTRUM(DEEP):     MJD(55000:55635:5)  TEXPOSE_ZPOLY(3600)
+GENMODEL: /project2/rkessler/SURVEYS/ROMAN/ROOT/SALT3-NIR_dev/SALT3.P22-NIR
 
 DNDZ: POWERLAW2 2.4E-5  1.55 0.0 1.0    # from Strolger 2020
-DNDZ: POWERLAW2 7.5E-5 -0.1 1.0 5.0    # high-z extension from Lou
+DNDZ: POWERLAW2 7.5E-5 -0.1 1.0 7.0    # high-z extension from Lou
 
 #LENSING_PROBMAP_FILE: $SNDATA_ROOT/models/lensing/LENSING_PROBMAP_LogNormal+MICECATv1.DAT
 #LENSING_DMUSCALE: 1.375

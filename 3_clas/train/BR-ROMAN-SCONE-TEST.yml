@@ -1,15 +1,31 @@
 # Using the Roman High Latitude Time Domain Reference survey (Rose+2021), 
 # Track down issues with SCONE and Pippin
+
+ALIAS: # matching main pippin file
+  COSMOLOGY: &cosmology
+      OMEGA_MATTER: 0.315
+      OMEGA_LAMBDA: 0.685
+      w0_LAMBDA:     -1.0
+      wa_LAMBDA:        0
+      H0:            70.0
+  
+  MWOPT: &mwopt
+      RV_MWCOLORLAW: 3.1
+      OPT_MWCOLORLAW: 99
+      OPT_MWEBV: 3
   
 SIM:
   SN_Ia:
     IA_SALT3:
-      BASE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/simgen_SNIa.input
+      BASE: $HLTDS_SIM_BASE_PATH/1_sim/simgen_SNIa.input
     GLOBAL:
       FORMAT_MASK: 48
       NGEN_UNIT: 0.05
       RANSEED_REPEAT: 1 12345
       BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 1
+      BATCH_MEM: 16GB # need this for the hostlib
+      <<: *cosmology
+      <<: *mwopt
 
 CLASSIFICATION:
   SCONE:
@@ -17,6 +33,6 @@ CLASSIFICATION:
     MODE: predict
     MASK: SN_Ia
     OPTS:
-      MODEL: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/3_clas/models/scone
+      MODEL: $HLTDS_SIM_BASE_PATH/3_clas/models/scone
       NUM_EPOCHS: 5
-      KCOR_FILE: /project2/rkessler/SURVEYS/WFIRST/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits
+      KCOR_FILE: /project2/rkessler/SURVEYS/ROMAN/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits

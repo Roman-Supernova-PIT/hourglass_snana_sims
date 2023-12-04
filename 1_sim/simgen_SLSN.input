@@ -1,12 +1,19 @@
 DOCUMENTATION:
+  PURPOSE:    Simulating SLSN in Roman
+  INTENT:     Nominal
+  USAGE_KEY:  simulation basefile
+  USAGE_CODE: snlc_sim.exe
+  NOTES:
+    - SLSN using Magnetar model (from MOSFIT group)
+    - C Alves, R.Kessler (13 Aug 2021) Added the RV parameters to avoid SIM abort
+  VERSIONS:
+    - DATE: Nov 30, 2023
+    - AUTHORS: Benjamin Rose
 DOCUMENTATION_END:
 
-INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/sim_roman.input
+INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/sim_roman.input
 
 GENTYPE: 40
-# SLSN using Magnetar model (from MOSFIT group)
-# C Alves, R.Kessler (13 Aug 2021) Added the RV parameters to avoid SIM abort
-#
 GENMODEL: $PLASTICC_MODELS/NON1ASED.SLSN-I-MOSFIT
 GENAV_WV07:   1       # WV07, Eq. 2
 GENRANGE_AV:  0  3    # CCM89 AV-extinctionrange

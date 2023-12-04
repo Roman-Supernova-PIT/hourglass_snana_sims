@@ -1,15 +1,20 @@
 DOCUMENTATION:
+  PURPOSE:    Simulating CCSN in Roman
+  INTENT:     Nominal
+  USAGE_KEY:  simulation basefile
+  USAGE_CODE: snlc_sim.exe
+  VERSIONS:
+    - DATE: Nov 30, 2023
+    - AUTHORS: Benjamin Rose
 DOCUMENTATION_END:
 
-INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/sim_roman.input
+INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/sim_roman.input
 
 GENTYPE: 30
 GENMODEL:  NON1ASED
 PATH_NON1ASED:  $PLASTICC_ROOT/model_libs_updates/NON1ASED.V19_CC+HostXT
 DNDZ:  CC_S15                   # Strolger 2015 (1509.06574)
 
-TAKE_SPECTRUM(WIDE):     MJD(55000:55635:5)  TEXPOSE_ZPOLY(900)
-TAKE_SPECTRUM(DEEP):     MJD(55000:55635:5)  TEXPOSE_ZPOLY(3600)
 
 #INPUT_FILE_INCLUDE: $SNDATA_ROOT/models/NON1ASED/NON1ASED.V19_CC+HostXT/SIMGEN_INCLUDE_NON1A.INPUT  #this file has PEC1A (91bg templates as well)
 # -----------------------------------------
@@ -35,7 +40,6 @@ NON1A_KEYS: 5
 NON1A:          701  0.033563   -0.40      0.40    20    ## IIP  ASASSN14jb
 NON1A:          735  0.033563   -0.40      0.40    20    ## IIP    SN2008in
 NON1A:          744  0.033563   -0.40      0.40    20    ## IIP     SN2009N
-NON1A:          717  0.033563   -0.40      0.40    20    ## IIP    SN2005cs
 NON1A:          737  0.033563   -0.40      0.40    20    ## IIP    SN2009bw
 NON1A:          739  0.033563   -0.40      0.40    20    ## IIP    SN2009ib
 NON1A:          731  0.033563   -0.40      0.40    20    ## IIP    SN2008bj
@@ -96,7 +100,7 @@ NON1A:          714  0.010725   -1.00      1.18    33     ## Ic    SN2004gt
 NON1A:          709  0.001835   -0.59      1.18    35  ## Ic-BL    SN2002ap
 NON1A:          753  0.001835    0.00      1.18    35  ## Ic-BL    SN2012ap
 NON1A:          726  0.001835    0.99      1.18    35  ## Ic-BL    SN2007ru
-NON1A:          720  0.001835    1.67      1.18    35  ## Ic-BL    SN2006aj
+#NON1A:          720  0.001835    1.67      1.18    35  ## Ic-BL    SN2006aj
 NON1A:          706  0.001835    1.27      1.18    35  ## Ic-BL    SN1998bw
 NON1A:          736  0.001835    1.06      1.18    35  ## Ic-BL    SN2009bb
 

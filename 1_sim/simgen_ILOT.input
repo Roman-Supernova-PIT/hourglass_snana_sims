@@ -1,12 +1,19 @@
 DOCUMENTATION:
+  PURPOSE:    Simulating ILOT in Roman
+  INTENT:     Nominal
+  USAGE_KEY:  simulation input
+  USAGE_CODE: snlc_sim.exe
+  NOTES:
+    - ILOT (Intermediate Luminosity Optical Transients)
+    - Nov 1 2021: add explicit RV
+  VERSIONS:
+  - DATE: Nov 30, 2023
+  - AUTHORS: Benjamin Rose
 DOCUMENTATION_END:
 
-INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/sim_roman.input
+INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/sim_roman.input
 
 GENTYPE: 45
-
-# ILOT (Intermediate Luminosity Optical Transients)
-# Nov 1 2021: add explicit RV
 
 GENMODEL: $PLASTICC_MODELS/NON1ASED.ILOT-MOSFIT
 GENAV_WV07:   1       # WV07, Eq. 2

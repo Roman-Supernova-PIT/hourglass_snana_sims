@@ -1,22 +1,28 @@
 DOCUMENTATION:
+  PURPOSE:    Simulating the Roman High Latitude Time Domain Survey
+  INTENT:     Nominal
+  USAGE_KEY:  INPUT_FILE_INCLUDE
+  USAGE_CODE: snlc_sim.exe
+  VERSIONS:
+    - DATE: Nov 30, 2023
+    - AUTHORS: Benjamin Rose
 DOCUMENTATION_END:
 
 
 #### ROMAN HLTD REFERENCE SURVEY ####
-SIMLIB_FILE:   /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/rose21_20_percent.simlib
+SIMLIB_FILE:   /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/rose21_20_percent.simlib
 SOLID_ANGLE: 0.0  # set in simlib
-GENRANGE_PEAKMJD:  60950 61740
-KCOR_FILE:  /project2/rkessler/SURVEYS/WFIRST/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits  # new filters changed 6/16 PM
+GENRANGE_PEAKMJD: 61800 62925  #+/- 200 days of the simlib 
+KCOR_FILE:  /project2/rkessler/SURVEYS/ROMAN/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits  # new filters changed 6/16 PM
 GENFILTERS:  YJHFZR
-TAKE_SPECTRUM(WIDE-PRISM):     MJD(61000:61725:5)  TEXPOSE_ZPOLY(900)
-TAKE_SPECTRUM(DEEP-PRISM):     MJD(61000:61725:5)  TEXPOSE_ZPOLY(3600)
+TAKE_SPECTRUM(WIDE-PRISM):     MJD(61000:62925:5)  TEXPOSE_ZPOLY(900)
+TAKE_SPECTRUM(DEEP-PRISM):     MJD(61000:62925:5)  TEXPOSE_ZPOLY(3600)
 
 
 ####### Simulation Generation ##########
 RANSEED: 12945
 GENSIGMA_SEARCH_PEAKMJD:  1.0     # sigma-smearing for SEARCH_PEAKMJD (days)
-GENRANGE_TREST:   -40.0     90.0     # rest epoch relative to peak (days), PLASTICC likes -100--500
-# SLSN had -100--500
+GENRANGE_TREST:   -40.0     90.0     # rest epoch relative to peak (days)
 GENRANGE_REDSHIFT:  0.1  3.50
 GENSIGMA_REDSHIFT:  0.001
 # smear flags: 0=off, 1=on
@@ -25,48 +31,41 @@ SMEARFLAG_ZEROPT:  1  # smear zero-point with zptsig
 
 
 #### Selection ####
-SEARCHEFF_PIPELINE_LOGIC_FILE:  /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/SEARCHEFF_PIPELINE_LOGIC.DAT
-SEARCHEFF_PIPELINE_EFF_FILE:   $WFIRST_ROOT/models/searcheff/SEARCHEFF_PIPELINE_WFIRST.DAT
-#SEARCHEFF_SPEC_FILE:  SEARCHEFF_SPEC_ZERO.DAT
-#SEARCHEFF_SPEC_SCALE: ZERO
+SEARCHEFF_PIPELINE_LOGIC_FILE:  /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/SEARCHEFF_PIPELINE_LOGIC.DAT
+SEARCHEFF_PIPELINE_EFF_FILE:   /project2/rkessler/SURVEYS/ROMAN/ROOT/models/searcheff/SEARCHEFF_PIPELINE_WFIRST.DAT
 NEWMJD_DIF: 0.4
 
 
 #### Host Galaxies ####
-HOSTLIB_FILE: /project2/rkessler/SURVEYS/WFIRST/ROOT/starterKits/sim_host_redshift/3dhst_sim_input_cat_v1.7.hostlib
-HOSTLIB_WGTMAP_FILE: $NGRST_ROOT/starterKits/sim_host_redshift/AKARI+specbasis_v1.5.1.WGTMAP
+HOSTLIB_FILE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/DREaMing.hostlib.gz
+HOSTLIB_WGTMAP_FILE: /project2/rkessler/SURVEYS/ROMAN/ROOT/starterKits/sim_host_redshift/AKARI+specbasis_v1.5.1.HOSTLIB.gz
 HOSTLIB_DZTOL: 0.01 0.0 0
 HOSTLIB_MSKOPT: 10 # 2 for poisson, 256 init verbose
 HOSTLIB_FIXRAN_RADIUS: 0.0 # fix radial random number (0-1)
 HOSTLIB_SBRADIUS: 0.2 
-SEARCHEFF_zHOST_FILE:  /project2/rkessler/SURVEYS/WFIRST/USERS/pmacias/dev/sim/searcheff/dust/new/roman_deep+subaru
+SEARCHEFF_zHOST_FILE:  /project2/rkessler/SURVEYS/ROMAN/USERS/pmacias/dev/sim/searcheff/dust/new/roman_deep+subaru
 APPLY_SEARCHEFF_OPT: 0   # some how this is removing a lot of objects, more then it should.
 APPLY_CUTWIN_OPT: 0
 
 
 ######## MW and Cosmology ##################
 #in pippin
-#OPT_MWEBV: 3   # SFD98
-#OPT_MWCOLORLAW: 94
-#OMEGA_MATTER:  0.3
-#OMEGA_LAMBDA:  0.7
-#W0_LAMBDA:    -1.00
-#H0:           70.0   
 
 
 #### Simulation Output Options #####
 FORMAT_MASK: 48   # FITS output + RANDOM CID
 # What should be put in the summary text "dump" file?
-SIMGEN_DUMPALL:  31
+SIMGEN_DUMPALL:  27
   CID FIELD GENTYPE  SNTYPE  NON1A_INDEX  ZCMB
-  LIBID RA DECL MWEBV MU PEAKMJD
+  RA DEC MWEBV MU PEAKMJD
   MAGT0_Y MAGT0_J 
   SNRMAX_Y SNRMAX_J 
-  SNRMAX SNRMAX2 SNRMAX3 
+  PEAKMAG_Y PEAKMAG_J 
+  SNRMAX SNRMAX2 
   NOBS TRESTMIN TRESTMAX TGAPMAX  
-  CUTMASK  SIM_SEARCHEFF_MASK
-  ZTRUE logsfr LENSDMU HOSTMAG_H 
-  logmass logssfr
+  CUTMASK
+  ZTRUE logsfr LENSDMU 
+  #logmass logssfr
   
   
 #### Not Needed ####  
