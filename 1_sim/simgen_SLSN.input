@@ -28,3 +28,5 @@ NON1A:           0    1.0   0.0       0.00    40
 
 # Volumetric rate
 DNDZ: MD14  2.0E-8      # MD14 SFR(z), with 2E-8/yr/Mpc^3 at z=0
+
+HOSTLIB_WGTMAP_FILE: $SNANA_ROMAN_ROOT/simlib/WGTMAPS/ROMAN_DIFFSKY_SLSN-I.WGTMAP.gz

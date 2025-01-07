@@ -31,4 +31,7 @@ GENSIGMA_RV: 0.0 0.0 # lo & hi Gaussian sigmas
 # Original volumetric rate (1.0E-6 per yr per Mpc^3) base on
 #  https://arxiv.org/abs/1710.05845  (Sec 2.3)
 # Updated volumetric rate: of  320 (+490-240) /Gpc^3/yr from https://arxiv.org/abs/2010.14533
-DNDZ: POWERLAW      3.2E-7  0.0    # /yr/MPc^3, no z-dependence
+#DNDZ: POWERLAW      3.2E-7  0.0    # /yr/MPc^3, no z-dependence, Abbott+ 2021
+DNDZ: POWERLAW       16E-7  0.0     # /yr/MPc^3, 5 times Abbott+ 2021
+
+#HOSTLIB_WGTMAP_FILE: $SNANA_ROMAN_ROOT/simlib/WGTMAPS/ROMAN_DIFFSKY_KN.WGTMAP.gz  #requires a hostlib with optical colors

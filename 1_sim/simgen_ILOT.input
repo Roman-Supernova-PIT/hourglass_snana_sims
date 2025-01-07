@@ -30,3 +30,5 @@ NON1A:           0    1.0   0.0       0.00    45
 # Volumetric rate is same as for IIn
 DNDZ: CC_S15         # rate from Strolger 2015 (HST)
 DNDZ_ALLSCALE: 0.06
+
+HOSTLIB_WGTMAP_FILE: $SNANA_ROMAN_ROOT/simlib/WGTMAPS/DES-SN5YR_DES_TypeII.WGT.gz

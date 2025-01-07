@@ -35,3 +35,4 @@ NON1A:           0    1.0   0.0       0.00    42
 #DNDZ: EPM 0.8E-7  # from van Velson 2017, Sec 5.2
 DNDZ: TDE  1.0E-6
 
+HOSTLIB_WGTMAP_FILE: $SNANA_ROMAN_ROOT/simlib/WGTMAPS/ROMAN_DIFFSKY_TDE.WGTMAP.gz

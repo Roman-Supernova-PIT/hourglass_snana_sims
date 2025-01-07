@@ -10,13 +10,13 @@ DOCUMENTATION_END:
 
 
 #### ROMAN HLTD REFERENCE SURVEY ####
-SIMLIB_FILE:   /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/rose21_20_percent.simlib
+SIMLIB_FILE:   /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/rose21_25_percent.simlib
 SOLID_ANGLE: 0.0  # set in simlib
 GENRANGE_PEAKMJD: 61800 62925  #+/- 200 days of the simlib 
-KCOR_FILE:  /project2/rkessler/SURVEYS/ROMAN/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits  # new filters changed 6/16 PM
+KCOR_FILE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/kcor/kcor_ROMAN.fits
 GENFILTERS:  YJHFZR
-TAKE_SPECTRUM(WIDE-PRISM):     MJD(61000:62925:5)  TEXPOSE_ZPOLY(900)
-TAKE_SPECTRUM(DEEP-PRISM):     MJD(61000:62925:5)  TEXPOSE_ZPOLY(3600)
+TAKE_SPECTRUM(WIDE+WIDE-PRISM):     MJD(61000:62925:5)  TEXPOSE_ZPOLY(900)
+TAKE_SPECTRUM(DEEP+DEEP-PRISM):     MJD(61000:62925:5)  TEXPOSE_ZPOLY(3600)
 
 
 ####### Simulation Generation ##########
@@ -32,20 +32,21 @@ SMEARFLAG_ZEROPT:  1  # smear zero-point with zptsig
 
 #### Selection ####
 SEARCHEFF_PIPELINE_LOGIC_FILE:  /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/SEARCHEFF_PIPELINE_LOGIC.DAT
-SEARCHEFF_PIPELINE_EFF_FILE:   /project2/rkessler/SURVEYS/ROMAN/ROOT/models/searcheff/SEARCHEFF_PIPELINE_WFIRST.DAT
+SEARCHEFF_PIPELINE_EFF_FILE:   /project2/rkessler/SURVEYS/ROMAN/ROOT/models/searcheff/SEARCHEFF_PIPELINE_ROMAN.DAT
 NEWMJD_DIF: 0.4
+CUTWIN_SNRMAX: 5 RZYJHF 2 -40 100  # SNR>5 for at least 2 filters, any time. 
+APPLY_CUTWIN_OPT: 1
 
 
 #### Host Galaxies ####
-HOSTLIB_FILE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/DREaMing.hostlib.gz
-HOSTLIB_WGTMAP_FILE: /project2/rkessler/SURVEYS/ROMAN/ROOT/starterKits/sim_host_redshift/AKARI+specbasis_v1.5.1.HOSTLIB.gz
-HOSTLIB_DZTOL: 0.01 0.0 0
+# HOSTLIB_FILE defined in my pippin scripts. default defined at end of this file
+HOSTLIB_DZTOL: 0.01,0.08,0.08   #was 0.01 0.0 0 default is "0.002,0,0.040"
 HOSTLIB_MSKOPT: 10 # 2 for poisson, 256 init verbose
 HOSTLIB_FIXRAN_RADIUS: 0.0 # fix radial random number (0-1)
 HOSTLIB_SBRADIUS: 0.2 
-SEARCHEFF_zHOST_FILE:  /project2/rkessler/SURVEYS/ROMAN/USERS/pmacias/dev/sim/searcheff/dust/new/roman_deep+subaru
+SEARCHEFF_zHOST_FILE: NONE
 APPLY_SEARCHEFF_OPT: 0   # some how this is removing a lot of objects, more then it should.
-APPLY_CUTWIN_OPT: 0
+HOSTLIB_WGTMAP_EXTRAP: 1    # can make some strange extreme values
 
 
 ######## MW and Cosmology ##################
@@ -55,8 +56,8 @@ APPLY_CUTWIN_OPT: 0
 #### Simulation Output Options #####
 FORMAT_MASK: 48   # FITS output + RANDOM CID
 # What should be put in the summary text "dump" file?
-SIMGEN_DUMPALL:  27
-  CID FIELD GENTYPE  SNTYPE  NON1A_INDEX  ZCMB
+SIMGEN_DUMP:  26
+  CID FIELD GENTYPE SNTYPE NON1A_INDEX ZCMB
   RA DEC MWEBV MU PEAKMJD
   MAGT0_Y MAGT0_J 
   SNRMAX_Y SNRMAX_J 
@@ -64,10 +65,11 @@ SIMGEN_DUMPALL:  27
   SNRMAX SNRMAX2 
   NOBS TRESTMIN TRESTMAX TGAPMAX  
   CUTMASK
-  ZTRUE logsfr LENSDMU 
-  #logmass logssfr
+  Z LENSDMU 
   
-  
+
 #### Not Needed ####  
 # parameter is not used with PIPPIN/batch jobs but checked by SNANA initiation
 NGENTOT_LC: 1
+# My pippin files overides this key, but I need a default.
+HOSTLIB_FILE: $SNANA_ROMAN_ROOT/starterKits/sim_host_redshift/3dhst_sim_input_cat_v1.7_BMR.hostlib

@@ -1,0 +1,25 @@
+LEAKAGE_CUT: 0.0002 # reject bins with trans/TransMax
+
+# Specify spectral template for supernova
+SN_SED: Hsiao07.dat   # see $SNDATA_ROOT/snsed
+
+# Specify filters :
+
+MAGSYSTEM: AB     (define mag system for filters below)
+FILTSYSTEM: COUNT
+FILTPATH:   $SNANA_ROMAN_ROOT/filters/20210614
+SURVEY:     ROMAN
+FILTER:  R062-R    ROMAN_R062.dat   0.0 (name, file, zero-point)
+FILTER:  Z087-Z    ROMAN_Z087.dat   0.0
+FILTER:  Y106-Y    ROMAN_Y106.dat   0.0
+FILTER:  J129-J    ROMAN_J129.dat   0.0
+FILTER:  H158-H    ROMAN_H158.dat   0.0
+FILTER:  F184-F    ROMAN_F184.dat   0.0
+FILTER:  W146-W    ROMAN_W146.dat   0.0
+SPECTROGRAPH:  PRISM.dat
+
+# Define lambda range for SN templates;
+LAMBDA_RANGE: 1900  30100
+
+# Define output file for kcor grid
+OUTFILE: kcor_ROMAN.fits
