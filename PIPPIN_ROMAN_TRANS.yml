@@ -51,7 +51,6 @@ ALIAS:
     RANSEED_REPEAT: 1 12345
     BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 1
     # BATCH_MEM: 20GB   #needed for large hostlib
-    <<: *simlib
     <<: *cosmology
     <<: *mwopt
 
