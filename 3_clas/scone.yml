@@ -1,0 +1,37 @@
+output_path: /scratch/midway2/rkessler/PIPPIN_OUTPUT/PIPPIN_ROMAN_TRANS/3_CLAS/SCONE_SUPERNOVA_models
+
+mode: train
+
+sbatch_template_default:      $SBATCH_TEMPLATES/SBATCH_scone_cpu.TEMPLATE
+sbatch_ncore_heatmaps:  32
+sbatch_mem:             40     # GB
+
+nevt_select_heatmaps:  8500,8500   # desired nevt for Ia,nonIa
+
+init_env_train:   source activate scone_cpu_tf2.6
+init_env_heatmaps: source activate scone_cpu_tf2.6
+init_env: source activate scone_cpu_tf2.6
+
+types:
+- II
+- Ia
+sn_type_id_to_name:
+  10: Ia
+  11: II
+  12: II
+  30: II
+  110: Ia
+  111: II
+  112: II
+  130: II
+Ia_fraction: 0.5
+batch_size: 32
+categorical: false
+class_balanced: true
+kcor_file: /project2/rkessler/SURVEYS/ROMAN/ROOT/kcor/H23/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits
+
+num_epochs: 100
+num_mjd_bins: 180
+num_wavelength_bins: 32
+sim_fraction: 1
+trained_model: null
