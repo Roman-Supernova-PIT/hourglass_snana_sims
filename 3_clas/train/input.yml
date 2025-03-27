@@ -11,7 +11,7 @@ sbatch_template_default:      $SBATCH_TEMPLATES/SBATCH_scone_cpu.TEMPLATE
 sbatch_ncore_heatmaps:  32
 sbatch_mem:             40     # GB
 
-nevt_select_heatmaps:  8500,8500   # desired nevt for Ia,nonIa
+nevt_select_heatmaps:  50000,50000   # desired nevt for Ia,nonIa
 
 init_env_train:   source activate scone_cpu_tf2.6
 init_env_heatmaps: source activate scone_cpu_tf2.6

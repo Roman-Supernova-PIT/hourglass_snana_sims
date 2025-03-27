@@ -1,6 +1,7 @@
 output_path: /scratch/midway2/rkessler/PIPPIN_OUTPUT/PIPPIN_ROMAN_TRANS/3_CLAS/SCONE_SUPERNOVA_models
 
 mode: train
+trained_model: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/3_clas/models/scone
 
 sbatch_template_default:      $SBATCH_TEMPLATES/SBATCH_scone_cpu.TEMPLATE
 sbatch_ncore_heatmaps:  32
@@ -34,4 +35,3 @@ num_epochs: 100
 num_mjd_bins: 180
 num_wavelength_bins: 32
 sim_fraction: 1
-trained_model: null

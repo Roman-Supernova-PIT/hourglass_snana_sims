@@ -181,11 +181,12 @@ CLASSIFICATION:
       CLASSIFIER: SconeClassifier
       MODE: predict
       MASK_SIM: SUPERNOVA
-      OPTS:
-        MODEL_MEM: 16GB
-        MODEL: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/3_clas/models/scone
-        NUM_EPOCHS: 5
-        KCOR_FILE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/kcor/kcor_ROMAN.fits
+      BASE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/3_clas/scone.yml
+      MODEL: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/3_clas/models/scone
+      #OPTS:
+       # MODEL_MEM: 16GB
+        #NUM_EPOCHS: 5
+        #KCOR_FILE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/kcor/kcor_ROMAN.fits
 
 AGGREGATION:
   AGG:

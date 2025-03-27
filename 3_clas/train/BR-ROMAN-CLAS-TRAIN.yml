@@ -1,28 +1,53 @@
 # Using the Roman High Latitude Time Domain Reference survey (Rose+2021), 
 # Train SupernNNova and SCONE for Roman.
+ALIAS:
+  APPEND_FITRES: &append_fitres
+    APPEND_TABLE_VARLIST: RA DEC TGAPMAX TrestMIN TrestMAX
+    
+  COSMOLOGY: &cosmology
+    OMEGA_MATTER: 0.315
+    OMEGA_LAMBDA: 0.685
+    w0_LAMBDA:     -1.0
+    wa_LAMBDA:        0
+    H0:            70.0
+  
+  MWOPT: &mwopt
+    RV_MWCOLORLAW: 3.1
+    OPT_MWCOLORLAW: 99
+    OPT_MWEBV: 3
+  
+  HOSTLIB: &hostlib
+    # HOSTLIB_FILE: $HLTDS_SIM_BASE_PATH/1_sim/DREaMing.hostlib.gz   # default in sim_roman.input
+    # HOSTLIB_FILE: $HLTDS_SIM_BASE_PATH/1_sim/DREaMing-small.hostlib.gz  # can cause redshift min range issues
+    # HOSTLIB_FILE: $HLTDS_SIM_BASE_PATH/1_sim/DREaMing-medium.hostlib.gz
+    HOSTLIB_FILE:  $SNANA_ROMAN_ROOT/starterKits/sim_host_redshift/3dhst_sim_input_cat_v1.7_BMR.hostlib
 
 SIM:
   #SuperNNOva needs ~400,000 Ia and ~400,000 CC and will balance them 50-50 internally.
   TRAIN:
     IA_SALT3:  # ~20k in one Roman survey
-      BASE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/simgen_SNIa.input
-      GENRANGE_REDSHIFT:  0.3  3.50
+      BASE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/simgen_SNIa.input
+      GENRANGE_REDSHIFT:  0.3  2.90
     Iax_TEMPLATES:  # ~32k (in Iax and CC) in one Roman survey
-      BASE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/simgen_SNIax.input
-      GENRANGE_REDSHIFT:  0.3  3.50
+      BASE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/simgen_SNIax.input
+      GENRANGE_REDSHIFT:  0.3  2.90
     CC_TEMPLATES: # II, IIn, IIb, Ib, Ic, Ic-BL
-      BASE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/simgen_CCSN.input
-      GENRANGE_REDSHIFT:  0.3  3.50
+      BASE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/simgen_CCSN.input
+      GENRANGE_REDSHIFT:  0.3  2.90
     SN91bg_TEMPLATES:
-      BASE: /project2/rkessler/SURVEYS/WFIRST/USERS/brose3/roman/1_sim/simgen_SNIa_91bg.input
-      GENRANGE_REDSHIFT:  0.3  3.50
+      BASE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/simgen_SNIa_91bg.input
+      GENRANGE_REDSHIFT:  0.3  2.90
     GLOBAL:
       FORMAT_MASK: 48
-      NGEN_UNIT: 1
+      NGEN_UNIT: 0.5
       # This can be cut down if you don't use SNN. But then change "CLASSIFICATION: SCORE_TRAIN: OPTS: SIM_FRACTION:"
       # Should be 20 jobs if you are training SNN.
-      RANSEED_REPEAT: 4 12452035
-      BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 4
+      RANSEED_REPEAT: 8 12452035
+      BATCH_INFO: sbatch $SBATCH_TEMPLATES/SBATCH_Midway2b.TEMPLATE 8
+      BATCH_MEM: 24GB
+      <<: *hostlib
+      <<: *cosmology
+      <<: *mwopt
 
 CLASSIFICATION:
   # SNN_TRAIN:
@@ -40,12 +65,15 @@ CLASSIFICATION:
   #     SEED: 0  # Sets random seed. Defaults to 0.
   #     LIST_FILTERS: ['R', 'Z', 'Y', 'J', 'H', 'F']
       
-  SCONE_TRAIN:
+  SCONE_TRAIN_f_unix_permissions:
     CLASSIFIER: SconeClassifier
     MODE: train
     MASK_SIM: TRAIN
-    OPTS:
-      GPU: False
-      NUM_EPOCHS: 100
-      # SIM_FRACTION: 5  # only need 1/5 the sim size as SNN. # use ~4 in BATCH_INFO
-      KCOR_FILE: /project2/rkessler/SURVEYS/WFIRST/ROOT/kcor/H19/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits
+    BASE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/3_clas/train/input.yml
+    # OPTS:
+    #   NUM_EPOCHS: 100
+    #   MODEL_MEM: 32GB
+      # ngen_unit of 4 Romans is ~ 81k. We need 10k min but 20--30k is good 
+      #SIM_FRACTION: 2  # only need 1/2 the sim size as SNN. # use ~2 in BATCH_INFO
+      # KCOR_FILE: /project2/rkessler/SURVEYS/ROMAN/ROOT/kcor/H23/kcor_WFIRST_CYCLE8_IMGPRISM_2021v3.fits
+    
