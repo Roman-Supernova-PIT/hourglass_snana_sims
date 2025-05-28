@@ -32,6 +32,17 @@ ALIAS:
     wa_LAMBDA:        0
     H0:            70.0
   
+  HOSTDUST: &hostdust
+    GENAV_WV07:   1       # WV07, Eq. 2
+    # GN updated 20210321 per RK - these are Maria Vincenzi's Galaxy Extinction params
+    GENPEAK_RV:       3.1          # peak prob dust parameter
+    GENRANGE_RV:      3.0  3.2     # min and max limits for RV generation
+    GENSIGMA_RV:      0.0  0.0     # lo & hi Gaussian sigmas
+    GENRANGE_AV:      0.001  3.0   # CCM89 V-band extinction
+    GENTAU_AV:        1.7          # dN/dAV = exp(-AV/xxx)
+    GENSIG_AV:        0.6          # += Guass(AV,sigma)
+    GENRATIO_AV0:     4.0
+    
   MWOPT: &mwopt
     RV_MWCOLORLAW: 3.1
     OPT_MWCOLORLAW: 99
@@ -64,6 +75,7 @@ SIM:
       <<: *hostlib
       <<: *cosmology
       <<: *mwopt
+      <<: *hostdust
     GLOBAL:
       <<: *pglobal
   
@@ -75,6 +87,7 @@ SIM:
       <<: *hostlib
       <<: *cosmology
       <<: *mwopt
+      <<: *hostdust
     GLOBAL:
       <<: *pglobal
   
@@ -87,6 +100,7 @@ SIM:
       <<: *hostlib
       <<: *cosmology
       <<: *mwopt
+      <<: *hostdust
     GLOBAL:
       <<: *pglobal
   
@@ -99,6 +113,7 @@ SIM:
       <<: *hostlib
       <<: *cosmology
       <<: *mwopt
+      <<: *hostdust
     GLOBAL:
       <<: *pglobal
   
@@ -112,6 +127,7 @@ SIM:
       <<: *hostlib
       <<: *cosmology
       <<: *mwopt
+      <<: *hostdust
     GLOBAL:
       <<: *pglobal
 
@@ -138,7 +154,7 @@ SIM:
       CIDOFF: 290000 # AGN has 500
       FORMAT_MASK: 32
       SEARCHEFF_zHOST_FILE: None
-      SIMGEN_DUMP: CID,FIELD,GENTYPE,SNTYPE,NON1A_INDEX,RA,DEC,MWEBV,ZCMB,MU,MAGT0_Y,MAGT0_J,PEAKMAG_Y,PEAKMAG_J,SNRMAX_Y,SNRMAX_J,SNRMAX,SNRMAX2,NOBS,PEAKMJD,TRESTMIN,TRESTMAX,TGAPMAX,CUTMASK
+      SIMGEN_DUMP: CID,FIELD,GENTYPE,SNTYPE,NON1A_INDEX,RA,DEC,MWEBV,ZCMB,MU,PEAKMAG_Y,PEAKMAG_J,SNRMAX_Y,SNRMAX_J,SNRMAX,SNRMAX2,NOBS,PEAKMJD,TRESTMIN,TRESTMAX,TGAPMAX,CUTMASK
       <<: *mwopt
     GLOBAL:
       RANSEED_REPEAT: 1 1234543
@@ -150,16 +166,19 @@ SIM:
       GENRANGE_REDSHIFT:  0.03  2.9 #5.90
       CIDOFF: 50000 # SNIa is 45_000
       <<: *hostlib
+      <<: *hostdust
     SN91bg_TEMPLATES:
       BASE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/simgen_SNIa_91bg.input
       GENRANGE_REDSHIFT:  0.03  2.9 #5.90
       CIDOFF: 220000 # CCSN is 166_556 objects 
       <<: *hostlib
+      <<: *hostdust
     Iax_TEMPLATES:
       BASE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/simgen_SNIax.input
       GENRANGE_REDSHIFT:  0.03  2.9 #5.90
       CIDOFF: 230000 # 91bg have 6360, Iax have 12_833
       <<: *hostlib
+      <<: *hostdust
     IA_SALT3:
       BASE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/simgen_SNIa.input
       GENRANGE_REDSHIFT:  0.03  2.90   #0.05 is min is using DREaMing-small.hostlib. 0.01 for others

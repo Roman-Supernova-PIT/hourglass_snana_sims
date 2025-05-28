@@ -56,16 +56,15 @@ HOSTLIB_WGTMAP_EXTRAP: 1    # can make some strange extreme values
 #### Simulation Output Options #####
 FORMAT_MASK: 48   # FITS output + RANDOM CID
 # What should be put in the summary text "dump" file?
-SIMGEN_DUMP:  26
+SIMGEN_DUMP:  24
   CID FIELD GENTYPE SNTYPE NON1A_INDEX ZCMB
   RA DEC MWEBV MU PEAKMJD
-  MAGT0_Y MAGT0_J 
   SNRMAX_Y SNRMAX_J 
   PEAKMAG_Y PEAKMAG_J 
   SNRMAX SNRMAX2 
   NOBS TRESTMIN TRESTMAX TGAPMAX  
   CUTMASK
-  Z LENSDMU 
+  ZCMB LENSDMU 
   
 
 #### Not Needed ####  

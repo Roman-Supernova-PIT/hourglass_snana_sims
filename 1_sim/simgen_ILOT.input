@@ -16,12 +16,12 @@ INPUT_FILE_INCLUDE: /project2/rkessler/SURVEYS/ROMAN/USERS/brose3/roman/1_sim/si
 GENTYPE: 45
 
 GENMODEL: $PLASTICC_MODELS/NON1ASED.ILOT-MOSFIT
-GENAV_WV07:   1       # WV07, Eq. 2
-GENRANGE_AV:  0  3    # CCM89 AV-extinctionrange
-
-GENPEAK_RV:       3.1          # peak prob dust parameter
-GENRANGE_RV:      3.0  3.2     # min and max limits for RV generation
-GENSIGMA_RV:      0.0  0.0     # lo & hi Gaussian sigmas
+#GENAV_WV07:   1       # WV07, Eq. 2
+#GENRANGE_AV:  0  3    # CCM89 AV-extinctionrange
+#
+#GENPEAK_RV:       3.1          # peak prob dust parameter
+#GENRANGE_RV:      3.0  3.2     # min and max limits for RV generation
+#GENSIGMA_RV:      0.0  0.0     # lo & hi Gaussian sigmas
 
 NON1A_KEYS: 5  INDEX  WGT  MAGOFF  MAGSMEAR SNTYPE
 NON1A:           0    1.0   0.0       0.00    45
